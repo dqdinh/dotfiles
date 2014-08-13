@@ -332,3 +332,12 @@ endfunction
 let pyindent_nested_paren="&sw*2"
 let pyindent_open_paren="&sw*2"
 
+
+" Arduino Customization
+"Default: /Applications/Arduino.app/Contents/Resources/Java
+"let g:vim_arduino_library_path = "~/home/ddinh/workspace/github/arduino-1.0.5"
+""Default: result of `$(ls /dev/tty.* | grep usb)`
+"let g:vim_arduino_serial_port = "/dev/ttyACMO"
+
+" Handlebars
+let g:mustache_abbreviations = 1
