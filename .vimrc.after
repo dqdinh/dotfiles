@@ -341,3 +341,16 @@ let pyindent_open_paren="&sw*2"
 
 " Handlebars
 let g:mustache_abbreviations = 1
+
+" Indent Guide
+set smartindent
+set tabstop=2
+set shiftwidth=2
+set expandtab
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_start_level = 4
+let g:indent_guides_guide_size = 1
+
+:autocmd VimEnter * :IndentGuidesEnable
+
+let g:syntastic_mode_map = { 'passive_filetypes': ['sass', 'scss'] }
