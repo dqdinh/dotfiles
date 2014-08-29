@@ -1,11 +1,8 @@
-# dd's dotfiles
-- .vimrc.after
-- .tmux.conf
+dd's dotfiles
+=============
+Using vim Janus and Oh-my-zsh
 
-- Using vim Janus
-- Using Oh-my-zsh
-
-- Additional vim plugins:
+Additional vim plugins:
 * powerline
 * ag.vim
 * rainbow_parentheses.vim
@@ -33,4 +30,4 @@
 * vim-cjsx
 * javascript-libraries-syntax.vim
 
-- To start a new tmux session: tmux -2 new -s clj
+To start a new tmux session: tmux -2 new -s clj
