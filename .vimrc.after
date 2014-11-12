@@ -9,16 +9,83 @@
 "Forget compatibility with Vi. Who cares.
 set nocompatible
 
+"
+" Custom Functions
+"
+
+" Remove trailing whitespace
+" http://vim.wikia.com/wiki/Remove_unwanted_spaces
+function! StripTrailingWhitespace()
+    if !&binary && &filetype != 'diff'
+        normal mz
+        normal Hmy
+        %s/\s\+$//e
+        normal 'yz<cr>
+        normal `z
+        retab
+    endif
+endfunction
+
+" Function to hide all the text except for the text selected in visual mode.
+" This is great for highlighting parts of the code. Just call the function
+" again to deselect everything.
+function! ToggleSelected(visual) range
+    highlight HideSelected ctermfg=bg ctermbg=bg
+                         \ guifg=bg guibg=bg gui=none term=none cterm=none
+
+    if exists('g:toggle_selected_hide')
+        call matchdelete(g:toggle_selected_hide)
+
+        unlet g:toggle_selected_hide
+        redraw
+
+        if !a:visual
+            return
+        endif
+    endif
+
+    let [lnum1, col1] = getpos(''<')[1:2]
+    let [lnum2, col2] = getpos(''>')[1:2]
+
+    let pattern = '\%^\|\%<'.lnum1.'l\|\%<'.col1.'v\|\%>'.lnum2.'l\|\%>'.col2.'v'
+    let g:toggle_selected_hide = matchadd('HideSelected', pattern, 1000)
+
+    redraw
+endfunction
+
+
+"
+" Global Settings
+"
+
 set nobackup
 set nowritebackup
 set noswapfile    " http://robots.thoughtbot.com/post/18739402579/global-gitignore#comment-458413287
-set history=50
+
+" The default 20 isn't nearly enough
+set history=9999
 
 "Enable filetypes
 filetype on
 filetype plugin on
 filetype indent on
+
+" Allows the backspace to delete indenting, end of lines, and over the start
+" of insert
+set backspace=indent,eol,start
+
+" Pretty colors
 syntax on
+
+" Show the matching when doing a search
+set showmatch
+
+" Always show the last line
+set display+=lastline
+
+" UTF-8
+set encoding=utf-8
+
 
 "Write the old file out when switching between files.
 set autowrite
@@ -28,29 +95,41 @@ set ruler
 
 "Want a different map leader than \
 let mapleader = "'"
+let maplocalleader = '\'
 
 "Ever notice a slight lag after typing the leader key + command? This lowers
 "the timeout.
 set timeoutlen=500
 
-"Switch between buffers without saving
-set hidden
-
 "Tab stuff
-"set tabstop=2
-"set shiftwidth=2
-"set softtabstop=2
-"set expandtab
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
+set expandtab
 
 "Show command in bottom right portion of the screen
 set showcmd
 
+" Disable beeping and flashing.
+set noerrorbells visualbell t_vb=
+autocmd GUIEnter * set visualbell t_vb=
+
 "Show no lines numbers
 set nonumber
 
-"Indent stuff
+" Use smarter defaults
 set smartindent
+set smarttab
 set autoindent
+
+" Turn on persistent undo
+" Thanks, Mr Wadsten: github.com/mikewadsten/dotfiles/
+if has('persistent_undo')
+  set undodir=~/.vim/undo//
+  set undofile
+  set undolevels=1000
+  set undoreload=10000
+endif
 
 "Always show the status line
 set laststatus=2
@@ -69,6 +148,9 @@ set incsearch
 
 "Highlight searching
 set hlsearch
+
+" Don't show the startup message
+set shortmess=I
 
 " case insensitive search
 set ignorecase
@@ -113,9 +195,6 @@ let g:user_zen_expandabbr_key = '<C-e>'
 "Faster shortcut for commenting. Requires T-Comment plugin
 map ,/ <c-_><c-_>
 
-"Saves time; maps the spacebar to colon
-nmap <space> :
-
 "Automatically change current directory to that of the file in the buffer
 " autocmd BufEnter * cd %:p:h
 
@@ -125,16 +204,77 @@ imap ,<tab> <C-x><C-o>
 " More useful command-line completion
 set wildmenu
 
+" Automatically re-read the file if it has changed
+set autoread
+
+" Off on start
+set nofoldenable
+
+" Indent seems to work the best
+set foldmethod=indent
+set foldlevel=20
+
 "Auto-completion menu
 set wildmode=list:longest
 
 "http://vim.wikia.com/wiki/Make_Vim_completion_popup_menu_work_just_like_in_an_IDE
 set completeopt=longest,menuone
-" inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-" inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
-"   \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
-" inoremap <expr> <M-,> pumvisible() ? '<C-n>' :
-"   \ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+
+"
+" Global Bindings
+"
+
+" source -- https://github.com/jdavis/dotfiles/blob/master/.vimrc
+" Disable ex mode, ick, remap it to Q instead.
+"
+" Tip:
+"   Use command-line-window with q:
+"   Use search history with q/
+"
+" More info:
+" http://blog.sanctum.geek.nz/vim-command-window/
+nmap Q q
+
+" Show only selected in Visual Mode
+nmap <silent> <leader>th :cal ToggleSelected(0)<cr>
+vmap <silent> <leader>th :cal ToggleSelected(1)<cr>
+
+" Split the window using some nice shortcuts
+nmap <leader>s<bar> :vsplit<cr>
+nmap <leader>s- :split<cr>
+
+" Unhighlight the last search pattern on Enter
+nn <silent> <cr> :nohlsearch<cr><cr>
+
+" Remove trailing whitespace
+nmap <leader>tW :cal StripTrailingWhitespace()<cr>
+
+" Control enhancements in insert mode
+imap <C-F> <right>
+imap <C-B> <left>
+imap <M-BS> <esc>vBc
+imap <C-P> <up>
+imap <C-N> <down>
+
+" When pushing j/k on a line that is wrapped, it navigates to the same line,
+" just to the expected location rather than to the next line
+nnoremap j gj
+nnoremap k gk
+
+" Arrow key users won't survive in this environment
+map <up> <nop>
+map <down> <nop>
+map <left> <nop>
+map <right> <nop>
+
+" Map Ctrl+V to paste in Insert mode
+imap <C-V> <C-R>*
+
+" Map Ctrl+C to copy in Visual mode
+vmap <C-C> "+y
+
+" Add paste shortcut
+nmap <leader>P "+p
 
 "Map escape key to jj -- much faster
 imap jj <esc>
@@ -163,9 +303,42 @@ nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l
 
+" Ignore some defaults
+set wildignore=*.o,*.obj,*~,*.pyc
+set wildignore+=.env
+set wildignore+=.env[0-9]+
+set wildignore+=.git,.gitkeep
+set wildignore+=.tmp
+set wildignore+=.coverage
+set wildignore+=*DS_Store*
+set wildignore+=.sass-cache/
+set wildignore+=__pycache__/
+set wildignore+=vendor/rails/**
+set wildignore+=vendor/cache/**
+set wildignore+=*.gem
+set wildignore+=log/**
+set wildignore+=tmp/**
+set wildignore+=.tox/**
+set wildignore+=.idea/**
+set wildignore+=*.egg,*.egg-info
+set wildignore+=*.png,*.jpg,*.gif
+set wildignore+=*.so,*.swp,*.zip,*/.Trash/**,*.pdf,*.dmg,*/Library/**,*/.rbenv/**
+set wildignore+=*/.nx/**,*.app
+
+" Fold Keybindings
+"nnoremap <space> za
+
+"
+" Custom Settings
+"
+
+" Set on textwidth when in markdown files
+autocmd FileType markdown set textwidth=80
+
 "------------------------"
 "NERDTREE PLUGIN SETTINGS
 "------------------------"
+
 "Shortcut for NERDTreeToggle
 nmap ,nt :NERDTreeToggle
 
@@ -178,7 +351,7 @@ let NERDTreeWinSize=20
 
 "Helpeful abbreviations
 iab lorem Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-iab llorem Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+iab llorem Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 
 "Spelling corrects. Just for example. Add yours below.
 iab teh the
@@ -191,9 +364,6 @@ iab Teh The
 " testing out 256 colors
 " http://vim.wikia.com/wiki/256_colors_in_vim
 set t_Co=256
-
-" A fancy status bar
-let g:airline_powerline_fonts = 1
 
 " P a pause when leaving insert mode
 set timeout timeoutlen=1000 ttimeoutlen=50
@@ -218,11 +388,8 @@ colorscheme seoul256
 if has('gui_running')
   "Using a cool patched font for powerline
   set guifont=Menlo:h14
-  "set background transparency and solarized style 
+  "set background transparency and solarized style
   set background=dark
-  "autopen NERDTree and focus cursor in new document
-  autocmd VimEnter * NERDTree
-  autocmd vimenter * wincmd p
 else
     set background=dark
     set mouse=a
@@ -272,8 +439,24 @@ augroup vimrcEx
   autocmd BufRead,BufNewFile *.md setlocal textwidth=80
 augroup END
 
-" Display extra whitespace
-set list listchars=tab:»·,trail:·
+" Whitespace settings
+
+" Show trailing whitespace and tabs obnoxiously
+set list listchars=tab:▸\ ,trail:.
+set list
+
+fun! ToggleWhitespace()
+    ToggleBadWhitespace
+    if &list
+        set nolist
+    else
+        set list listchars=tab:▸\ ,trail:.
+        set list
+    endif
+endfun
+
+nmap <leader>tw :cal ToggleWhitespace()<cr>
+
 
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
 if executable('ag')
@@ -291,8 +474,18 @@ let g:html_indent_tags = 'li\|p'
 set splitbelow
 set splitright
 
+" Syntastic Settings
+let g:syntastic_always_populate_loc_list=1
+let g:syntastic_error_symbol = '✗'
+let g:syntastic_warning_symbol = '!'
+let g:syntastic_auto_loc_list = 2
+let g:syntastic_enable_signs = 1
+let g:syntastic_filetype_map = { 'rnoweb': 'tex'}
+
 " configure syntastic syntax checking to check on open as well as save
 let g:syntastic_check_on_open=1
+let g:syntastic_mode_map = { 'passive_filetypes': ['html', 'sass', 'scss'] }
+let g:syntastic_html_tidy_ignore_errors=['trimming empty']
 
 
 " Indent Python in the Google way.
@@ -332,14 +525,6 @@ endfunction
 let pyindent_nested_paren="&sw*2"
 let pyindent_open_paren="&sw*2"
 
-
-" Arduino Customization
-"Default: /Applications/Arduino.app/Contents/Resources/Java
-"let g:vim_arduino_library_path = "~/home/ddinh/workspace/github/arduino-1.0.5"
-""Default: result of `$(ls /dev/tty.* | grep usb)`
-"let g:vim_arduino_serial_port = "/dev/ttyACMO"
-
-" Handlebars
 let g:mustache_abbreviations = 1
 
 " Indent Guide
@@ -353,4 +538,227 @@ let g:indent_guides_guide_size = 1
 
 :autocmd VimEnter * :IndentGuidesEnable
 
-let g:syntastic_mode_map = { 'passive_filetypes': ['sass', 'scss'] }
+" Airline options
+" A fancy status bar
+let g:airline_powerline_fonts = 1
+
+let g:airline_enable_branch = 1
+let g:airline_enable_syntastic = 1
+
+" Enable the list of buffers
+let g:airline#extensions#tabline#enabled = 1
+
+" Show just the filename
+let g:airline#extensions#tabline#fnamemod = ':t'"
+
+" MiniBufExpl Colors
+hi MBENormal               guifg=#808080 guibg=fg
+hi MBEChanged              guifg=#CD5907 guibg=fg
+hi MBEVisibleNormal        guifg=#5DC2D6 guibg=fg
+hi MBEVisibleChanged       guifg=#F1266F guibg=fg
+hi MBEVisibleActiveNormal  guifg=#A6DB29 guibg=fg
+hi MBEVisibleActiveChanged guifg=#F1266F guibg=fg
+
+" Buffer related modifactions
+" Switch between buffers without saving
+" This allows buffers to be hidden if you've modified a buffer.
+" This is almost a must if you wish to use buffers in this way.
+set hidden
+
+" To open a new empty buffer
+" This replaces :tabnew which I used to bind to this mapping
+nmap <leader>T :enew<cr>
+
+" Move to the next buffer
+nmap <leader>l :bnext<CR>
+
+" Move to the previous buffer
+nmap <leader>h :bprevious<CR>
+
+" Close the current buffer and move to the previous one
+" This replicates the idea of closing a tab
+nmap <leader>bq :bp <BAR> bd #<CR>
+
+" Show all open buffers and their status
+nmap <leader>bl :ls<CR>
+
+" CtrlP Settings
+" Setup some default ignores
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/](\.(git|hg|svn)|\_site)$',
+  \ 'file': '\v\.(exe|so|dll|class|png|jpg|jpeg)$',
+\}
+
+" Use the nearest .git directory as the cwd
+" This makes a lot of sense if you are working on a project that is in version
+" control. It also supports works with .svn, .hg, .bzr.
+let g:ctrlp_working_path_mode = 'r'
+
+" Use a leader instead of the actual named binding
+nmap <leader>p :CtrlP<cr>
+
+" Easy bindings for its various modes
+nmap <leader>bb :CtrlPBuffer<cr>
+nmap <leader>bm :CtrlPMixed<cr>
+nmap <leader>bs :CtrlPMRU<cr>
+
+" Use the right side of the screen
+let g:buffergator_viewport_split_policy = 'R'
+
+" I want my own keymappings...
+let g:buffergator_suppress_keymaps = 1
+
+" Looper buffers
+"let g:buffergator_mru_cycle_loop = 1
+
+" Go to the previous buffer open
+nmap <leader>jj :BuffergatorMruCyclePrev<cr>
+
+" Go to the next buffer open
+nmap <leader>kk :BuffergatorMruCycleNext<cr>
+
+" View the entire list of buffers open
+nmap <leader>bl :BuffergatorOpen<cr>
+
+" Shared bindings from Solution #1 from earlier
+nmap <leader>T :enew<cr>
+nmap <leader>bq :bp <BAR> bd #<cr>
+
+" Fugitive mapping
+nmap <leader>gb :Gblame<cr>
+nmap <leader>gc :Gcommit<cr>
+nmap <leader>gd :Gdiff<cr>
+nmap <leader>gg :Ggrep
+nmap <leader>gl :Glog<cr>
+nmap <leader>gp :Git pull<cr>
+nmap <leader>gP :Git push<cr>
+nmap <leader>gs :Gstatus<cr>
+nmap <leader>gw :Gbrowse<cr>
+
+" VimFiler options
+let g:vimfiler_as_default_explorer = 1
+let g:vimfiler_ignore_pattern = '^\%(\.git\|\.DS_Store\|\.class\|\.aux\|\.sw[po]\|\.py[co]\)$'
+
+autocmd BufEnter * if (winnr('$') == 1 && &filetype ==# 'vimfiler') | q | endif
+
+call vimfiler#custom#profile('default', 'context', {
+            \ 'explorer' : 1,
+            \ 'safe' : 0,
+            \ })
+
+
+" VimFiler keybindings
+nmap <leader>tb :VimFilerExplorer<cr>
+nmap <leader>tB :VimFiler<cr>
+
+
+" Easymotion
+map <space> <Plug>(easymotion-prefix)
+
+let g:EasyMotion_smartcase = 1
+map <space>h <Plug>(easymotion-lineforward)
+map <space>j <Plug>(easymotion-j)
+map <space>k <Plug>(easymotion-k)
+map <space>l <Plug>(easymotion-linebackward)
+
+let g:EasyMotion_startofline = 0
+
+
+" Complete UltiSnip snippets with <tab>
+function! g:UltiSnips_Complete()
+    call UltiSnips#ExpandSnippet()
+    if g:ulti_expand_res == 0
+        if pumvisible()
+            return "\<C-n>"
+        else
+            call UltiSnips#JumpForwards()
+            if g:ulti_jump_forwards_res == 0
+               return "\<TAB>"
+            endif
+        endif
+    endif
+    return ''
+endfunction
+
+au InsertEnter * exec 'inoremap <silent> ' . g:UltiSnipsExpandTrigger . ' <C-R>=g:UltiSnips_Complete()<cr>'
+
+let g:UltiSnipsExpandTrigger = '<tab>'
+let g:UltiSnipsJumpForwardTrigger = '<tab>'
+let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
+
+
+
+" Undotree settings
+nmap <leader>tu :UndotreeToggle<cr>
+let g:undotree_SplitWidth = 30
+let g:undotree_WindowLayout = 3
+
+" Multiple Cursors Settings
+let g:multi_cursor_use_default_mapping = 0
+let g:multi_cursor_next_key = '<C-j>'
+let g:multi_cursor_prev_key = '<C-k>'
+let g:multi_cursor_skip_key = '<C-x>'
+let g:multi_cursor_quit_key = '<Esc>'
+
+
+" Tagbar Options
+" Toggle Tagbar
+nmap <leader>tt :TagbarToggle<cr>
+let g:tagbar_left = 0
+let g:tagbar_width = 30
+
+let g:tagbar_type_css = {
+\ 'ctagstype' : 'Css',
+    \ 'kinds'     : [
+        \ 'c:classes',
+        \ 's:selectors',
+        \ 'i:identities'
+    \ ]
+\ }
+
+"Proper Go support is provided by the gotags project, complete with how to configure Tagbar to make use of it.
+
+"Alternatively, if you use the Go patch for exuberant-ctags or the Debian/Ubuntu
+"let g:tagbar_type_go = {
+    "\ 'ctagstype': 'go',
+    "\ 'kinds' : [
+        "\'p:package',
+        "\'f:function',
+        "\'v:variables',
+        "\'t:type',
+        "\'c:const'
+    "\]
+"\}
+
+"A more reliable alternative is hasktags. Add the following to you .vimrc.
+let g:tagbar_type_haskell = {
+    \ 'ctagsbin'  : 'hasktags',
+    \ 'ctagsargs' : '-x -c -o-',
+    \ 'kinds'     : [
+        \  'm:modules:0:1',
+        \  'd:data: 0:1',
+        \  'd_gadt: data gadt:0:1',
+        \  't:type names:0:1',
+        \  'nt:new types:0:1',
+        \  'c:classes:0:1',
+        \  'cons:constructors:1:1',
+        \  'c_gadt:constructor gadt:1:1',
+        \  'c_a:constructor accessors:1:1',
+        \  'ft:function types:1:1',
+        \  'fi:function implementations:0:1',
+        \  'o:others:0:1'
+    \ ],
+    \ 'sro'        : '.',
+    \ 'kind2scope' : {
+        \ 'm' : 'module',
+        \ 'c' : 'class',
+        \ 'd' : 'data',
+        \ 't' : 'type'
+    \ },
+    \ 'scope2kind' : {
+        \ 'module' : 'm',
+        \ 'class'  : 'c',
+        \ 'data'   : 'd',
+        \ 'type'   : 't'
+    \ }
+\ }
