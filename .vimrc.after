@@ -365,12 +365,6 @@ set t_Co=256
 " P a pause when leaving insert mode
 set timeout timeoutlen=1000 ttimeoutlen=50
 
-"For autocompletion of Snipmate plugin
-let g:acp_behaviorSnipmateLength = 1
-
-" Snipmate
-:filetype plugin on
-
 " Scrollbar junk
 set guioptions=aAce
 
@@ -598,6 +592,8 @@ nmap <leader>bl :ls<CR>
 
  let g:UltiSnipsExpandTrigger="<c-j>"
 
+" Snipmate
+:filetype plugin on
 
 " CtrlP Settings
 " Setup some default ignores
