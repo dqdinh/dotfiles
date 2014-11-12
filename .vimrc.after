@@ -199,9 +199,6 @@ map ,/ <c-_><c-_>
 "Automatically change current directory to that of the file in the buffer
 " autocmd BufEnter * cd %:p:h
 
-"Map code completion to , + tab
-imap ,<tab> <C-x><C-o>
-
 " More useful command-line completion
 set wildmenu
 
@@ -645,31 +642,6 @@ map <space>k <Plug>(easymotion-k)
 map <space>l <Plug>(easymotion-linebackward)
 
 let g:EasyMotion_startofline = 0
-
-
-" Complete UltiSnip snippets with <tab>
-function! g:UltiSnips_Complete()
-    call UltiSnips#ExpandSnippet()
-    if g:ulti_expand_res == 0
-        if pumvisible()
-            return "\<C-n>"
-        else
-            call UltiSnips#JumpForwards()
-            if g:ulti_jump_forwards_res == 0
-               return "\<TAB>"
-            endif
-        endif
-    endif
-    return ''
-endfunction
-
-au InsertEnter * exec 'inoremap <silent> ' . g:UltiSnipsExpandTrigger . ' <C-R>=g:UltiSnips_Complete()<cr>'
-
-let g:UltiSnipsExpandTrigger = '<tab>'
-let g:UltiSnipsJumpForwardTrigger = '<tab>'
-let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
-
-
 
 " Undotree settings
 nmap <leader>tu :UndotreeToggle<cr>
