@@ -1,8 +1,7 @@
-dd's dotfiles
+Vim Janus, tmux, and Oh-my-zsh
 =============
-Using vim Janus, tmux, and Oh-my-zsh
 
-Additional vim plugins:
+Vim plugins:
 
 - vim-eunuch
 - screen
@@ -42,8 +41,9 @@ Additional vim plugins:
 - tagbar
 - undotree
 - CoffeeTags
-- tern_for_vim
-
-
+- tern_for_vimu 
+- youcompleteme
+- supertab(included w/ janus)
+- vim-node
 
 To start a new tmux session: tmux -2 new -s clj
