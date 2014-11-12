@@ -3,31 +3,47 @@ dd's dotfiles
 Using vim Janus and Oh-my-zsh
 
 Additional vim plugins:
-* powerline
-* ag.vim
-* rainbow_parentheses.vim
-* screen
-* seoul256.vim
-* vim-arduino-syntax
-* vim-clojure-static
-* vim-clojure-highlight
-* vim-fireplace
-* vim-leiningen
-* vim-coffee-script
-* vim-dispatch
-* vim-mustache-handlebars
-* vim-projectionist
-* vim-repeat
-* vim-ruby
-* vim-scala
-* vim-sexp
-* vim-sexp-mappings-for-regular-people
-* vim-surround
-* lojure-highlight
-* vim-javascript
-* auto-pairs
-* vim-jsx
-* vim-cjsx
-* javascript-libraries-syntax.vim
+
+vim-eunuch
+screen
+vim-dispatch
+seoul256.vim
+julia-vim
+Vim-R-plugin
+ag.vim
+vim-easymotion
+vim-multiple-cursors
+vim-coffee-script
+vim-javascript
+vim-surround
+vim-repeat
+vim-clojure-static
+vim-leiningen
+vim-projectionist
+vim-fireplace
+vim-clojure-highlight
+vim-sexp
+vim-indent-guides
+vim-css-color
+vim-jsx
+vim-cjsx
+auto-pairs
+vim-javascript-syntax
+vim-stylus
+vim-css3-syntax
+vimfiler.vim
+unite.vim
+vim-jade
+vim-airline
+minibufexpl.vim
+tmuxline.vim
+ultisnips
+vim-snippets
+tagbar
+undotree
+CoffeeTags
+tern_for_vim
+
+
 
 To start a new tmux session: tmux -2 new -s clj
