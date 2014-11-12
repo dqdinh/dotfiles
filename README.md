@@ -1,6 +1,6 @@
 dd's dotfiles
 =============
-Using vim Janus and Oh-my-zsh
+Using vim Janus, tmux, and Oh-my-zsh
 
 Additional vim plugins:
 
