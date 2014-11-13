@@ -49,3 +49,6 @@ Vim plugins:
 - netrw
 
 To start a new tmux session: tmux -2 new -s clj
+
+config osx to copy/paste to clipboard:
+http://robots.thoughtbot.com/tmux-copy-paste-on-os-x-a-better-future
