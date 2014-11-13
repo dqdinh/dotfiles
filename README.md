@@ -45,5 +45,7 @@ Vim plugins:
 - youcompleteme
 - supertab(included w/ janus)
 - vim-node
+- vim-vinegar
+- netrw
 
 To start a new tmux session: tmux -2 new -s clj
