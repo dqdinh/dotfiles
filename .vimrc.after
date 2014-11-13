@@ -343,8 +343,21 @@ nmap ,nt :NERDTreeToggle
 let NERDTreeShowHidden=1
 
 "customize window width
-let NERDTreeWinSize=20
+let NERDTreeWinSize=30
 
+"Prevent NT from replacing Netrw
+let NERDTreeHijackNetrw=0
+
+" Netrw
+let g:netrw_altv          = 1
+let g:netrw_fastbrowse    = 2
+let g:netrw_keepdir       = 0
+let g:netrw_retmap        = 1
+let g:netrw_silent        = 1
+let g:netrw_special_syntax= 1
+
+" Explorer
+nmap <leader>E :Explore<cr>
 
 "Helpeful abbreviations
 iab lorem Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
