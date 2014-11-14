@@ -47,6 +47,7 @@ Vim plugins:
 - vim-node
 - vim-vinegar
 - netrw
+- t-comment
 
 To start a new tmux session: tmux -2 new -s clj
 
