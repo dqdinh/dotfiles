@@ -36,8 +36,6 @@ Vim plugins:
 - vim-airline
 - minibufexpl.vim
 - tmuxline.vim
-- ultisnips
-- vim-snippets
 - tagbar
 - undotree
 - CoffeeTags
