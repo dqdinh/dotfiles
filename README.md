@@ -46,6 +46,7 @@ Vim plugins:
 - vim-vinegar
 - netrw
 - t-comment
+- vim-easy-align
 
 To start a new tmux session: tmux -2 new -s clj
 
