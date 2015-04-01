@@ -51,5 +51,5 @@ Vim plugins:
 
 To start a new tmux session: tmux -2 new -s clj
 
-config osx to copy/paste to clipboard:
-http://robots.thoughtbot.com/tmux-copy-paste-on-os-x-a-better-future
+Linters
+- eslint - To make this work with syntastic I think you need to do a npm install -g eslint and with any eslint plugins.
