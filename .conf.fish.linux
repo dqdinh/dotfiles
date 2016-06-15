@@ -1,0 +1,5 @@
+set -g -x PATH /usr/bin /usr/local/bin $PATH
+
+alias ee "emacs -nw"
+alias vv "vim ."
+alias ll "ls -lahtr"
