@@ -1,6 +1,8 @@
 Vim Janus, tmux, and Oh-my-zsh
 =============
 
+To start a new tmux session: tmux -2 new -s clj
+
 Vim plugins:
 
 - vim-eunuch
@@ -49,7 +51,6 @@ Vim plugins:
 - vim-easy-align
 - vim-jasmine (https://github.com/claco/jasmine.vim)
 
-To start a new tmux session: tmux -2 new -s clj
 
 Linters
 - eslint - To make this work with syntastic I think you need to do a npm install -g eslint and with any eslint plugins.
