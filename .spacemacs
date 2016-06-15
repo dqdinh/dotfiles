@@ -23,20 +23,32 @@ values."
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
+     (shell
+      :variables
+      shell-default-shell 'term
+      shell-default-term-shell "/usr/bin/fish")
      auto-completion
      better-defaults
-     markdown
      clojure
      colors
+     eyebrowse
+     haskell
      html
      javascript
-     vinegar
+     markdown
+     nixos
+     ocaml
      org
      python
      react
+     restclient
      ruby
      ruby-on-rails
-     swift
+     tmux
+     unimpaired
+     vim-powerline
+     vinegar
+     )
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
