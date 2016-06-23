@@ -1,6 +1,7 @@
-]set -g -x PATH /bin /usr/bin /usr/local/bin $PATH
+set -g -x PATH /usr/local/bin $PATH
 
 alias e "emacs -nw"
+alias emacs "emacs -nw"
 alias v "vim ."
 alias ll "ls -lahtr"
 alias t "tmux -2"
