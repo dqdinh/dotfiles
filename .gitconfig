@@ -1,0 +1,29 @@
+core]
+	excludesfile = /Users/ddinh/.gitignore_global
+	editor = vim
+[alias]
+	st = status
+	di = diff
+	co = checkout
+	ci = commit -v
+	br = branch
+	sta = stash
+	llog = log --date=local
+	cat = cat-file
+	ffwd = pull --rebase
+	changes = diff --name-status -r
+	diffstat = diff --stat -r
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+[apply]
+	whitespace = nowarn
+[color]
+	branch = auto
+	diff = auto
+	interactive = auto
+	status = auto
+	ui = auto
+	showbranch = auto
+	grep = auto
+[branch]
+	autosetupmerge = true
+	autosetuprebase = always
