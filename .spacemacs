@@ -36,9 +36,9 @@ values."
      html
      javascript
      markdown
-     nixos
      ocaml
      org
+     osx
      python
      react
      restclient
@@ -211,6 +211,14 @@ user code."
   ;; clojure
   (setq clojure-enable-fancify-symbols t)
   (global-company-mode)
+  ;; parens
+  (setq show-paren-delay 0)
+  (show-paren-mode 1)
+  (setq show-paren-style 'parenthesis)
+  (require 'paren)
+  (set-face-background 'show-paren-match (face-background 'default))
+  (set-face-foreground 'show-paren-match "#def")
+  (set-face-attribute 'show-paren-match nil :weight 'extra-bold)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
