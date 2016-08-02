@@ -219,6 +219,10 @@ user code."
   (set-face-background 'show-paren-match (face-background 'default))
   (set-face-foreground 'show-paren-match "#def")
   (set-face-attribute 'show-paren-match nil :weight 'extra-bold)
+  ;; js
+  (javascript :variables javascript-disable-tern-port-files nil)
+  (setq-default js2-basic-offset 2)
+  (setq-default js-indent-level 2)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
