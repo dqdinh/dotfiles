@@ -18,22 +18,23 @@ values."
    ;; of a list then all discovered layers will be installed.
    dotspacemacs-configuration-layers
    '(
-     asciidoc
      auto-completion
      better-defaults
      git
      helm
      html
-     javascript
      markdown
-     nginx
-     python
-     (ruby :variables ruby-version-manager 'rbenv ruby-test-runner 'rspec)
+     (org :variables
+         org-projectile-file "/Users/ddinh/workspace/TODO.org")
+     (ruby :variables
+           ruby-version-manager 'rbenv
+           ruby-test-runner 'rspec)
+     (shell :variables
+            shell-default-shell 'eshell
+            shell-enable-smart-eshell t)
      scala
+     javascript
      sql
-     ;;(syntax-checking syntax-checking-enable-tooltips nil)
-     syntax-checking
-     systemd
      vinegar
      yaml
      )
@@ -193,20 +194,11 @@ values."
   "Initialization function for user code.
 It is called immediately after `dotspacemacs/init'.  You are free to put any
 user code."
-  (setq-default flycheck-scalastylerc "/Users/ddinh/workspace/lookout/scalastyle_config.xml")
-  (setq-default flycheck-rubocop-lint-only)
-  )
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (flycheck-pos-tip pos-tip flycheck systemd nginx-mode evil avy dash sql-indent auto-complete adoc-mode markup-faces hydra iedit smeargle orgit org magit-gitflow helm-gitignore gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link evil-magit magit magit-popup git-commit with-editor highlight bind-key inf-ruby smartparens yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode helm-pydoc cython-mode company-anaconda anaconda-mode pythonic projectile web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc company-tern dash-functional tern coffee-mode company yaml-mode yasnippet bind-map helm helm-core mmm-mode markdown-toc markdown-mode gh-md reveal-in-osx-finder pbcopy osx-trash osx-dictionary launchctl noflet ensime sbt-mode scala-mode ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spacemacs-theme spaceline rvm ruby-tools ruby-test-mode rubocop rspec-mode robe restart-emacs request rbenv rake rainbow-delimiters quelpa popwin persp-mode paradox org-plus-contrib org-bullets open-junk-file neotree mwim move-text minitest lorem-ipsum linum-relative link-hint info+ indent-guide ido-vertical-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag google-translate golden-ratio flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu dumb-jump define-word company-statistics column-enforce-mode clean-aindent-mode chruby bundler auto-yasnippet auto-highlight-symbol aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+)
+
+(defun dotspacemacs/user-config()
+  "Configuration function for user code.
+This function is called at the very end of Spacemacs initialization after
+layers configuration. You are free to put any user code."
+  (global-git-commit-mode t)
+)
