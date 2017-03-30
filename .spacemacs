@@ -18,9 +18,9 @@ values."
    ;; of a list then all discovered layers will be installed.
    dotspacemacs-configuration-layers
    '(
+     restclient
      python
      emacs-lisp
-     spell-checking
      auto-completion
      better-defaults
      git
@@ -31,13 +31,12 @@ values."
      html
      markdown
      (org :variables
-         org-projectile-file "/Users/ddinh/workspace/TODO.org")
+	  org-enable-github-support t
+          org-enable-reveal-js-support t
+          org-projectile-file "~/workspace/lookout/org/TODO.org")
      (ruby :variables
            ruby-version-manager 'rbenv
            ruby-test-runner 'rspec)
-     (shell :variables
-            shell-default-shell 'eshell
-            shell-enable-smart-eshell t)
      scala
      javascript
      sql
@@ -203,12 +202,32 @@ values."
   "Initialization function for user code.
 It is called immediately after `dotspacemacs/init'.  You are free to put any
 user code."
-)
+  )
 
 (defun dotspacemacs/user-config()
   "Configuration function for user code.
 This function is called at the very end of Spacemacs initialization after
 layers configuration. You are free to put any user code."
-    ;; org babel settings
-    (require 'ob-sh)
+  ;; org babel settings
+  (require 'ob-sh)
+  (require 'ob-http)
+  ;; Spacemacs can be used as the $EDITOR (or $GIT_EDITOR) for editing git commits messages.
+  (global-git-commit-mode t)
+  (with-eval-after-load 'org
+    (setq org-agenda-files (list "~/workspace/lookout/org/TODO.org")))
+  (setq org-reveal-root "file:///Users/ddinh/workspace/lookout/reveal.js/")
+  )
+
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
 )
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
