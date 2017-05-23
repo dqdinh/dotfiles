@@ -18,6 +18,8 @@ values."
    ;; of a list then all discovered layers will be installed.
    dotspacemacs-configuration-layers
    '(
+     shell-scripts
+     clojure
      csv
      restclient
      python
@@ -32,7 +34,7 @@ values."
      html
      markdown
      (org :variables
-	  org-enable-github-support t
+          org-enable-github-support t
           org-enable-reveal-js-support t
           org-projectile-file "~/workspace/lookout/org/TODO.org")
      (ruby :variables
@@ -48,9 +50,11 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages then consider to create a layer, you can also put the
    ;; configuration in `dotspacemacs/config'.
-   dotspacemacs-additional-packages '(paredit)
+   dotspacemacs-additional-packages '(nix-mode groovy-mode)
    ;; A list of packages and/or extensions that will not be install and loaded.
-   dotspacemacs-excluded-packages '()
+   ;; `exec-path-from-shell` excluded b/c
+   ;; https://github.com/syl20bnr/spacemacs/issues/8144#issuecomment-284994682
+   dotspacemacs-excluded-packages '(exec-path-from-shell)
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
    ;; are declared in a layer which is not a member of
    ;; the list `dotspacemacs-configuration-layers'. (default t)
@@ -203,8 +207,8 @@ values."
   "Initialization function for user code.
 It is called immediately after `dotspacemacs/init'.  You are free to put any
 user code."
-  (push '("melpa-stable" . "stable.melpa.org/packages/") configuration-layer--elpa-archives)
-  (push '("ensime" . "melpa-stable") package-pinned-packages)
+  ;; (push '("melpa-stable" . "stable.melpa.org/packages/") configuration-layer--elpa-archives)
+  ;; (push '("ensime" . "melpa-stable") package-pinned-packages)
   )
 
 (defun dotspacemacs/user-config()
@@ -220,18 +224,3 @@ layers configuration. You are free to put any user code."
     (setq org-agenda-files (list "~/workspace/lookout/org/TODO.org")))
   (setq org-reveal-root "file:///Users/ddinh/workspace/lookout/reveal.js/")
   )
-
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
-)
-
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
