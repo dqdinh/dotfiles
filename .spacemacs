@@ -2,6 +2,13 @@
 ;; This file is loaded by Spacemacs at startup.
 ;; It must be stored in your home directory.
 
+;; NOTE we're on spacemac's development branch
+;; git clone -b develop https://github.com/syl20bnr/spacemacs ~/.emacs.d
+;; Alternatively,
+;; cd ~/.emacs.d
+;; git checkout develop
+;; git pull --rebase
+
 (defun dotspacemacs/layers ()
   "Configuration Layers declaration.
 You should not put any user code in this function besides modifying the variable
@@ -42,6 +49,7 @@ values."
            ruby-test-runner 'rspec)
      scala
      javascript
+     java
      sql
      vinegar
      yaml
