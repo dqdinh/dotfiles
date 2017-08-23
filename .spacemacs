@@ -2,13 +2,6 @@
 ;; This file is loaded by Spacemacs at startup.
 ;; It must be stored in your home directory.
 
-;; NOTE we're on spacemac's development branch
-;; git clone -b develop https://github.com/syl20bnr/spacemacs ~/.emacs.d
-;; Alternatively,
-;; cd ~/.emacs.d
-;; git checkout develop
-;; git pull --rebase
-
 (defun dotspacemacs/layers ()
   "Configuration Layers declaration.
 You should not put any user code in this function besides modifying the variable
@@ -24,13 +17,15 @@ values."
    ;; List of configuration layers to load. If it is the symbol `all' instead
    ;; of a list then all discovered layers will be installed.
    dotspacemacs-configuration-layers
-   '(
+   '(nginx
+     asciidoc
      shell-scripts
      clojure
      csv
      restclient
      python
      emacs-lisp
+     ess
      auto-completion
      better-defaults
      git
@@ -215,17 +210,22 @@ values."
   "Initialization function for user code.
 It is called immediately after `dotspacemacs/init'.  You are free to put any
 user code."
-  ;; (push '("melpa-stable" . "stable.melpa.org/packages/") configuration-layer--elpa-archives)
-  ;; (push '("ensime" . "melpa-stable") package-pinned-packages)
+	(push '("melpa-stable" . "stable.melpa.org/packages/") configuration-layer--elpa-archives)
+	(push '(ensime . "melpa-stable") package-pinned-packages)
+    (eval-after-load 'org
+      (lambda()
+        (require 'ess-site)
+        (require 'ob-R)
+        (require 'ob-emacs-lisp)
+        (require 'ob-shell)
+        (setq org-export-babel-evaluate nil)
+        (setq org-confirm-babel-evaluate nil)))
   )
 
 (defun dotspacemacs/user-config()
   "Configuration function for user code.
 This function is called at the very end of Spacemacs initialization after
 layers configuration. You are free to put any user code."
-  ;; org babel settings
-  (require 'ob-sh)
-  (require 'ob-http)
   ;; Spacemacs can be used as the $EDITOR (or $GIT_EDITOR) for editing git commits messages.
   (global-git-commit-mode t)
   (with-eval-after-load 'org
