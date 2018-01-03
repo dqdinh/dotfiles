@@ -1,6 +1,5 @@
 ;; -*- mode: emacs-lisp -*-
-;; This file is loaded by Spacemacs at startup.
-;; It must be stored in your home directory.
+;; This file is loaded by Spacemacs at startup.  ;; It must be stored in your home directory.
 
 (defun dotspacemacs/layers ()
   "Configuration Layers declaration.
@@ -17,37 +16,29 @@ values."
    ;; List of configuration layers to load. If it is the symbol `all' instead
    ;; of a list then all discovered layers will be installed.
    dotspacemacs-configuration-layers
-   '(nginx
-     asciidoc
-     shell-scripts
-     clojure
-     csv
-     restclient
-     python
-     emacs-lisp
-     ess
+   '(
      auto-completion
      better-defaults
+     dash
+     emacs-lisp
      git
-     (version-control :variables
-                      version-control-global-margin nil
-                      version-control-diff-tool 'diff-hl)
      helm
      html
-     markdown
-     (org :variables
-          org-enable-github-support t
-          org-enable-reveal-js-support t
-          org-projectile-file "~/workspace/lookout/org/TODO.org")
-     (ruby :variables
-           ruby-version-manager 'rbenv
-           ruby-test-runner 'rspec)
-     scala
-     javascript
      java
+     javascript
+     markdown
+     restclient
+     (scala :variables
+            scala-auto-insert-asterisk-in-comments t
+            scala-indent:use-javadoc-style t)
+     shell-scripts
      sql
      vinegar
      yaml
+     org
+     (ruby :variables
+           ruby-test-runner 'rspec
+           ruby-version-manager 'rvm)
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -210,25 +201,16 @@ values."
   "Initialization function for user code.
 It is called immediately after `dotspacemacs/init'.  You are free to put any
 user code."
-	(push '("melpa-stable" . "stable.melpa.org/packages/") configuration-layer--elpa-archives)
-	(push '(ensime . "melpa-stable") package-pinned-packages)
-    (eval-after-load 'org
-      (lambda()
-        (require 'ess-site)
-        (require 'ob-R)
-        (require 'ob-emacs-lisp)
-        (require 'ob-shell)
-        (setq org-export-babel-evaluate nil)
-        (setq org-confirm-babel-evaluate nil)))
+  (eval-after-load 'org
+    (lambda()
+      (require 'ob-emacs-lisp)
+      (require 'ob-shell)
+      (setq org-export-babel-evaluate nil)
+      (setq org-confirm-babel-evaluate nil)))
   )
 
 (defun dotspacemacs/user-config()
   "Configuration function for user code.
 This function is called at the very end of Spacemacs initialization after
 layers configuration. You are free to put any user code."
-  ;; Spacemacs can be used as the $EDITOR (or $GIT_EDITOR) for editing git commits messages.
-  (global-git-commit-mode t)
-  (with-eval-after-load 'org
-    (setq org-agenda-files (list "~/workspace/lookout/org/TODO.org")))
-  (setq org-reveal-root "file:///Users/ddinh/workspace/lookout/reveal.js/")
   )
