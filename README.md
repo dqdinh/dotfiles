@@ -3,6 +3,11 @@
 ## Emacs
 
 ### Org mode
+#### Troubleshooting
+- if you can't evalutate code in org mode, try the following:
+cd .emacs.d/elpa/
+# I suggest to run this without "delete" first.
+find org* -name "*.elc" -delete
 
 #### R
 ```
