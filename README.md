@@ -1,7 +1,7 @@
 # Notes
 
 ## Most used IntelliJ Shortcuts / Keyboard Mappings
-
+```
 commmand b                            : go to definition
 command shift p                       : type info
 command e                             : recent files
@@ -11,7 +11,7 @@ command shift n                       : go to file
 command shift alt n / control shift n : navigate to symbol
 command alt <- / shift <-             : Pop back to the previously visited position in current file
 command alt -> / shift ->             : Pop forward to the previously visited position in current file
-
+```
 ## Emacs
 
 ### Org mode
