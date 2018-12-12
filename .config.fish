@@ -1,28 +1,13 @@
 # Various aliases
-alias ee "/usr/local/opt/emacs-plus/Emacs.app/Contents/MacOS/Emacs -nw"
-alias emacs "/usr/local/opt/emacs-plus/Emacs.app/Contents/MacOS/Emacs -nw"
-alias vv "vim ."
 alias ll "ls -lahtr"
-
-# Add paths
-set -g fish_user_paths "/usr/local/opt/protobuf@2.6/bin" "/usr/local/mysql/bin" $fish_user_paths
-
-# load RVM
 rvm default
+set -g fish_user_paths "/usr/local/opt/imagemagick@6/bin" $fish_user_paths
+alias mysql "/usr/local/mysql/bin/mysql"
+set -x EDITOR vim
+set -x TERM xterm-256color
+alias java11 "/Users/ddinh/workspace/java11/Contents/Home/bin/java"
+alias jshell11 "/Users/ddinh/workspace/java11/Contents/Home/bin/jshell"
 
-function __check_nvm --on-variable PWD --description 'Do nvm stuff'
-  if test -f .nvmrc
-    set node_version (nvm version)
-    set nvmrc_node_version (nvm version (cat .nvmrc))
-
-    if [ $nvmrc_node_version = "N/A" ]
-      nvm install
-    else if [ $nvmrc_node_version != $node_version ]
-      nvm use
-    end
-  end
+function nvm
+  bass source ~/.nvm/nvm.sh --no-use ';' nvm $argv
 end
-
-# Note: uncomment when doing JS dev
-# To check current dir upon Fish session start
-#__check_nvm
