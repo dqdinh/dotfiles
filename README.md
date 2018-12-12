@@ -1,5 +1,22 @@
 # Notes
 
+## Fish
+
+NVM on Fish
+```
+# Install omf
+1. curl -L https://get.oh-my.fish | fish
+
+# Install bass
+2. omf install bass
+
+# Install NVM
+3. curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
+
+# use NVM or add this as a function inside the fish config
+4. bass source ~/.nvm/nvm.sh --no-use ';' nvm use default
+```
+
 ## Most used IntelliJ Shortcuts / Keyboard Mappings
 ```
 commmand b                            : go to definition
