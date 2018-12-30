@@ -1,6 +1,14 @@
 # Notes
 
-## Fish
+## Tmux (https://github.com/gpakosz/.tmux)
+```
+control + b + Enter   : vim visual mode / copy and paste / keyboard scroll
+control + b + - / _   : horizontal split / vertical split
+control + b + c       : new tmux tab 
+control + b + n       : next tmux tab
+```
+
+## Fish (https://github.com/oh-my-fish/oh-my-fish)
 
 NVM on Fish
 ```
@@ -19,7 +27,7 @@ NVM on Fish
 
 ## Most used IntelliJ Shortcuts / Keyboard Mappings
 ```
-commmand b                            : go to definition
+command b                            : go to definition
 command shift p                       : type info
 command e                             : recent files
 command 7                             : show method structure
@@ -29,7 +37,7 @@ command shift alt n / control shift n : navigate to symbol
 command alt <- / shift <-             : Pop back to the previously visited position in current file
 command alt -> / shift ->             : Pop forward to the previously visited position in current file
 ```
-## Emacs
+## Emacs (https://github.com/syl20bnr/spacemacs)
 
 ### Org mode
 #### Troubleshooting
