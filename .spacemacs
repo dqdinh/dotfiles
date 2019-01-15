@@ -9,8 +9,7 @@ values."
   (setq-default
    ;; Base distribution to use. This is a layer contained in the directory
    ;; `+distribution'. For now available distributions are `spacemacs-base'
-   ;; or `spacemacs'. (default 'spacemacs)
-   dotspacemacs-distribution 'spacemacs
+   ;; or `spacemacs'. (default 'spacemacs) dotspacemacs-distribution 'spacemacs
    ;; Lazy installation of layers (i.e. layers are installed only when a file
    ;; with a supported type is opened). Possible values are `all', `unused'
    ;; and `nil'. `unused' will lazy install only unused layers (i.e. layers
@@ -31,31 +30,33 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
-     csv
      auto-completion
      better-defaults
+     csv
      dash
      emacs-lisp
+     evil-commentary
      git
      helm
      html
      java
      javascript
+     (markdown :variables markdown-live-preview-engine 'vmd)
      org
+     pdf-tools
      plantuml
-     restclient
+     (restclient :variables restclient-use-org t)
+     (ruby :variables
+           ruby-insert-encoding-magic-comment nil
+           ruby-test-runner 'rspec
+           ruby-version-manager 'rvm)
      shell-scripts
-     sql
-     typescript
+     spotify
      vinegar
      yaml
-     (markdown :variables markdown-live-preview-engine 'vmd)
      (scala :variables
             scala-auto-insert-asterisk-in-comments t
             scala-indent:use-javadoc-style t)
-     (ruby :variables
-           ruby-test-runner 'rspec
-           ruby-version-manager 'rvm)
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -314,6 +315,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
       (require 'ob-restclient)
       (require 'ob-plantuml)
       (setq org-plantuml-jar-path "/Users/ddinh/plantuml.jar")
+
       (setq org-capture-templates '(
                                     ("t" "Task" entry
                                      (file+headline "~/workspace/org/gtd/inbox.org" "Inbox")
@@ -485,5 +487,5 @@ you should place your code here."
   (setq projectile-enable-caching t)
   (setq-default js2-basic-offset 2)
   (setq-default js-indent-level 2)
-  (setq magit-repository-directories '("~/workspace/"))
+  (setq magit-repository-directories '("/Users/ddinh/workspace/"))
   )
