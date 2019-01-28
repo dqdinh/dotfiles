@@ -9,6 +9,14 @@ control + b + n       : next tmux tab
 ```
 
 ## Fish (https://github.com/oh-my-fish/oh-my-fish)
+NVM
+```bash
+nvm list
+nvm use stable
+
+# Update stable and reinstall all packages
+nvm install stable --reinstall-packages-from=node 
+```
 
 NVM on Fish
 ```
