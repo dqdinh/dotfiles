@@ -30,6 +30,7 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     windows-scripts
      auto-completion
      better-defaults
      csv
@@ -51,7 +52,10 @@ values."
            ruby-test-runner 'rspec
            ruby-version-manager 'rvm)
      shell-scripts
-     spotify
+     (spell-checking :variables
+                     ispell-program-name "aspell"
+                     ispell-dictionary "en")
+     syntax-checking
      vinegar
      yaml
      (scala :variables
@@ -488,4 +492,6 @@ you should place your code here."
   (setq-default js2-basic-offset 2)
   (setq-default js-indent-level 2)
   (setq magit-repository-directories '("/Users/ddinh/workspace/"))
+  (setq-default flycheck-scalastylerc "/Users/ddinh/workspace/org/config/scalastyle_config.xml")
   )
+
