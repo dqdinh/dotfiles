@@ -30,7 +30,6 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
-     windows-scripts
      auto-completion
      better-defaults
      csv
