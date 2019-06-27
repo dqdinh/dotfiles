@@ -43,7 +43,6 @@ values."
      javascript
      (markdown :variables markdown-live-preview-engine 'vmd)
      org
-     pdf-tools
      plantuml
      (restclient :variables restclient-use-org t)
      (ruby :variables
@@ -143,8 +142,8 @@ values."
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
-   dotspacemacs-default-font '("Source Code Pro"
-                               :size 13
+   dotspacemacs-default-font '("Dank Mono"
+                               :size 14
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -301,7 +300,7 @@ values."
    ;; `trailing' to delete only the whitespace at end of lines, `changed'to
    ;; delete only whitespace for changed lines or `nil' to disable cleanup.
    ;; (default nil)
-   dotspacemacs-whitespace-cleanup nil
+   dotspacemacs-whitespace-cleanup "trailing"
    ))
 
 (defun dotspacemacs/user-init ()
@@ -317,32 +316,18 @@ before packages are loaded. If you are unsure, you should try in setting them in
       (require 'ob-shell)
       (require 'ob-restclient)
       (require 'ob-plantuml)
-      (setq org-plantuml-jar-path "/Users/ddinh/plantuml.jar")
+      (setq org-plantuml-jar-path "/Users/david.dinh/workspace/plantuml.1.2019.7.jar")
 
       (setq org-capture-templates '(
                                     ("t" "Task" entry
-                                     (file+headline "~/workspace/org/gtd/inbox.org" "Inbox")
+                                     (file+headline "/Users/david.dinh/workspace/org/inbox.org" "Inbox")
                                      "* TODO %i%? \n %U")
-                                    ("p" "Project" entry
-                                     (file+headline "~/workspace/org/gtd/projects.org" "Projects")
-                                     "* %i%?")
-                                    ("m" "Maybe" entry
-                                     (file+headline "~/workspace/org/gtd/maybe.org" "Maybe")
-                                     "* %i%?")
                                     ))
-      (setq org-refile-targets '(("~/workspace/org/gtd/projects.org" :maxlevel . 1)
-                                 ("~/workspace/org/gtd/maybe.org" :maxlevel . 1)
-                                 ("~/workspace/org/gtd/notes.org" :maxlevel . 1)
-                                 ))
-
       (setq org-agenda-files
             (quote
              (
-              "~/workspace/org/gtd/inbox.org"
-              "~/workspace/org/gtd/agenda.org"
-              "~/workspace/org/gtd/projects.org"
-              "~/workspace/org/gtd/notes.org"
-              "~/workspace/org/gtd/maybe.org")))
+              "/Users/david.dinh/workspace/org/inbox.org"
+              )))
 
       (setq org-agenda-custom-commands
             '(
@@ -351,7 +336,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
                 ;; limits the agenda display to a single day
                 (tags-todo "+PRIORITY=\"A\"")
                 (tags-todo "computer|office|phone|email|work")
-                (tags "review" ((org-agenda-files '("~/workspace/org/gtd/inbox.org" "~/workspace/org/gtd/projects.org" "~/workspace/org/gtd/maybe.org"))))
+                (tags "review" ((org-agenda-files '("/Users/david.dinh/workspace/org/inbox.org"))))
                 ;; limits the tag search to the file circuspeanuts.org
                 (todo "WAITING"))
                ((org-agenda-compact-blocks t))) ;; options set here apply to the entire block
@@ -370,69 +355,9 @@ before packages are loaded. If you are unsure, you should try in setting them in
                 (org-agenda-time-grid nil)
                 (org-agenda-repeating-timestamp-show-all t)   ;; [3]
                 (org-agenda-entry-types '(:timestamp :sexp))))  ;; [4]
-
-              ("ca" "Weekly - appointments" agenda ""
-               ((org-agenda-span 7)           ;; agenda will start in week view
-                (org-agenda-repeating-timestamp-show-all t)   ;; ensures that repeating events appear on all relevant dates
-                (org-agenda-skip-function '(org-agenda-skip-entry-if 'deadline 'scheduled)))) ;; limits agenda view to timestamped items
-
-              ("d" "Upcoming deadlines" agenda ""
-               ((org-agenda-entry-types '(:deadline))
-                ;; a slower way to do the same thing
-                ;; (org-agenda-skip-function '(org-agenda-skip-entry-if 'notdeadline))
-                (org-agenda-span 1)
-                (org-deadline-warning-days 60)
-                (org-agenda-time-grid nil)))
-
-              ("P" "Printed agenda"
-               ((agenda "" ((org-agenda-span 7)                      ;; overview of appointments
-                            (org-agenda-start-on-weekday nil)         ;; calendar begins today
-                            (org-agenda-repeating-timestamp-show-all t)
-                            (org-agenda-entry-types '(:timestamp :sexp))))
-                (agenda "" ((org-agenda-span 1)                      ; daily agenda
-                            (org-deadline-warning-days 7)            ; 7 day advanced warning for deadlines
-                            (org-agenda-todo-keyword-format "[ ]")
-                            (org-agenda-scheduled-leaders '("" ""))
-                            (org-agenda-prefix-format "%t%s")))
-                (todo "TODO"                                          ;; todos sorted by context
-                      ((org-agenda-prefix-format "[ ] %T: ")
-                       (org-agenda-sorting-strategy '(tag-up priority-down))
-                       (org-agenda-todo-keyword-format "")
-                       (org-agenda-overriding-header "\nTasks by Context\n------------------\n"))))
-               ((org-agenda-with-colors nil)
-                (org-agenda-compact-blocks t)
-                (org-agenda-remove-tags t)
-                (ps-number-of-columns 2)
-                (ps-landscape-mode t))
-               ("~/workspace/org/gtd/agenda.png"))
-
-              ("g" . "GTD contexts")
-              ("go" "Office" tags-todo "office")
-              ("gc" "Computer" tags-todo "computer")
-              ("gp" "Phone" tags-todo "phone")
-              ("gh" "Home" tags-todo "home")
-              ("ge" "Errands" tags-todo "errands")
-              ("G" "GTD Block Agenda"
-               ((tags-todo "office")
-                (tags-todo "computer")
-                (tags-todo "phone")
-                (tags-todo "home")
-                (tags-todo "errands"))
-               nil                      ;; i.e., no local settings
-               ("~/next-actions.html"))
-
-              ("p" . "Priorities")
-              ("pa" "A items" tags-todo "+PRIORITY=\"A\"")
-              ("pb" "B items" tags-todo "+PRIORITY=\"B\"")
-              ("pc" "C items" tags-todo "+PRIORITY=\"C\"")
-
-              ;; ...other commands here
-
               ))
 
       (setq org-refile-allow-creating-parent-nodes 'confirm)
-
-      (setq org-default-notes-file (concat org-directory "/notes.org"))
 
       (setq org-M-RET-may-split-line (quote ((default))))
       (setq org-agenda-default-appointment-duration 60)
@@ -490,7 +415,21 @@ you should place your code here."
   (setq projectile-enable-caching t)
   (setq-default js2-basic-offset 2)
   (setq-default js-indent-level 2)
-  (setq magit-repository-directories '("/Users/ddinh/workspace/"))
-  (setq-default flycheck-scalastylerc "/Users/ddinh/workspace/org/config/scalastyle_config.xml")
+  (setq magit-repository-directories '("/Users/david.dinh/workspace/oss" "/Users/david.dinh/workspace/lookout"))
+  (setq-default flycheck-scalastylerc "/Users/david.dinh/workspace/configs/scalastyle_config.xml")
   )
 
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (yaml-mode ws-butler winum web-mode web-beautify volatile-highlights vmd-mode vi-tilde-fringe uuidgen unfill toc-org tagedit spaceline powerline smeargle slim-mode scss-mode sass-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe restclient-helm restart-emacs rbenv rake rainbow-delimiters pug-mode popwin plantuml-mode persp-mode pdf-tools tablist paradox spinner orgit org-present org-pomodoro alert log4e gntp org-plus-contrib org-mime org-download org-bullets open-junk-file ob-restclient ob-http noflet neotree mwim move-text mmm-mode minitest markdown-toc markdown-mode magit-gitflow magit-popup lorem-ipsum livid-mode skewer-mode simple-httpd linum-relative link-hint json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc insert-shebang indent-guide hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-gitignore request helm-dash dash-docs helm-css-scss helm-company helm-c-yasnippet haml-mode google-translate golden-ratio gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md fuzzy flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck flx-ido fish-mode fill-column-indicator fancy-battery eyebrowse expand-region evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist highlight evil-numbers evil-mc evil-matchit evil-magit magit transient git-commit with-editor evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-ediff evil-commentary evil-args evil-anzu anzu eval-sexp-fu ensime sbt-mode scala-mode emmet-mode dumb-jump f define-word dash-at-point csv-mode company-web web-completion-data company-tern dash-functional tern company-statistics company-shell company-restclient restclient know-your-http-well company-emacs-eclim eclim s dash company column-enforce-mode coffee-mode clean-aindent-mode chruby bundler inf-ruby auto-yasnippet yasnippet auto-highlight-symbol auto-dictionary aggressive-indent adaptive-wrap ace-link ac-ispell auto-complete which-key use-package pcre2el macrostep hydra helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-ag exec-path-from-shell evil-visualstar evil-escape elisp-slime-nav diminish bind-map auto-compile ace-window ace-jump-helm-line))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ 
