@@ -1,5 +1,26 @@
 # Notes
 
+## Packages
+
+### General
+
+### Linux
+
+### OSX
+- spacemacs
+- nvm
+- brew: fish
+- fish: bass
+- fish: oh-my-fish
+- brew: adoptopenjdk cask
+- brew: aspell
+- plantuml jar via sourceforge
+- brew: sbt
+- brew: scala
+- ammonite via website
+- brew: vim
+
+
 ## Tmux (https://github.com/gpakosz/.tmux)
 ```
 control + b + Enter   : vim visual mode / copy and paste / keyboard scroll
