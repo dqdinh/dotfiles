@@ -415,21 +415,6 @@ you should place your code here."
   (setq projectile-enable-caching t)
   (setq-default js2-basic-offset 2)
   (setq-default js-indent-level 2)
-  (setq magit-repository-directories '("/Users/david.dinh/workspace/oss" "/Users/david.dinh/workspace/lookout"))
+  (setq magit-repository-directories '("/Users/david.dinh/workspace/oss" "/Users/david.dinh/workspace/projects"))
   (setq-default flycheck-scalastylerc "/Users/david.dinh/workspace/configs/scalastyle_config.xml")
   )
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (yaml-mode ws-butler winum web-mode web-beautify volatile-highlights vmd-mode vi-tilde-fringe uuidgen unfill toc-org tagedit spaceline powerline smeargle slim-mode scss-mode sass-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe restclient-helm restart-emacs rbenv rake rainbow-delimiters pug-mode popwin plantuml-mode persp-mode pdf-tools tablist paradox spinner orgit org-present org-pomodoro alert log4e gntp org-plus-contrib org-mime org-download org-bullets open-junk-file ob-restclient ob-http noflet neotree mwim move-text mmm-mode minitest markdown-toc markdown-mode magit-gitflow magit-popup lorem-ipsum livid-mode skewer-mode simple-httpd linum-relative link-hint json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc insert-shebang indent-guide hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-gitignore request helm-dash dash-docs helm-css-scss helm-company helm-c-yasnippet haml-mode google-translate golden-ratio gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md fuzzy flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck flx-ido fish-mode fill-column-indicator fancy-battery eyebrowse expand-region evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist highlight evil-numbers evil-mc evil-matchit evil-magit magit transient git-commit with-editor evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-ediff evil-commentary evil-args evil-anzu anzu eval-sexp-fu ensime sbt-mode scala-mode emmet-mode dumb-jump f define-word dash-at-point csv-mode company-web web-completion-data company-tern dash-functional tern company-statistics company-shell company-restclient restclient know-your-http-well company-emacs-eclim eclim s dash company column-enforce-mode coffee-mode clean-aindent-mode chruby bundler inf-ruby auto-yasnippet yasnippet auto-highlight-symbol auto-dictionary aggressive-indent adaptive-wrap ace-link ac-ispell auto-complete which-key use-package pcre2el macrostep hydra helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-ag exec-path-from-shell evil-visualstar evil-escape elisp-slime-nav diminish bind-map auto-compile ace-window ace-jump-helm-line))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
