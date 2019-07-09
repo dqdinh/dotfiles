@@ -1,33 +1,42 @@
 # Notes
 
-## Packages
+## Ubuntu
+```
+Super : brings up search
+```
 
-### General
-
-### Linux
-
-### OSX
-- spacemacs
+## General Setup
+- emacs with spacemacs or DIY
 - nvm
-- brew: fish
-- fish: bass
-- fish: oh-my-fish
-- brew: adoptopenjdk cask
-- brew: aspell
+- tmux with oh-my-tmux config or DIY
+- shells: fish (bass, oh-my-fish) or zsh (oh-my-zsh)
 - plantuml jar via sourceforge
-- brew: sbt
-- brew: scala
-- ammonite via website
-- brew: vim
+- aspell
 
+### Packages worth jotting down
+```
+# Java
+# - this requires adding the openjdk apt repository
+sudo apt-get install adoptopenjdk-11-hotspot
 
-## Tmux (https://github.com/gpakosz/.tmux)
+# Customize keyboard keys
+# - swap super key with alt key
+# - caps lock replace with control
+sudo apt-get install gnome-tweak-tool
+
+# Check that emacs package is latest before installing
+sudo apt-get install emacs
+```
+
+## Oh My Tmux (https://github.com/gpakosz/.tmux)
 ```
 control + b + Enter   : vim visual mode / copy and paste / keyboard scroll
 control + b + - / _   : horizontal split / vertical split
 control + b + c       : new tmux tab 
 control + b + n       : next tmux tab
 ```
+
+## ZSH (https://github.com/robbyrussell/oh-my-zsh)
 
 ## Fish (https://github.com/oh-my-fish/oh-my-fish)
 NVM
@@ -79,7 +88,7 @@ find org* -name "*.elc" -delete
 ```
 https://emacs.stackexchange.com/questions/32001/org-babel-9-spacemacs-unable-to-evaluate-org-babel-src-blocks
 
-#### R
+#### Org Tangle Example
 ```
 #+BEGIN_SRC R :session :results output :tangle yes
 #+END_SRC
