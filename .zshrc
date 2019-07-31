@@ -1,101 +1,85 @@
-# Path to your oh-my-zsh configuration.
-ZSH=$HOME/.oh-my-zsh
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
+# Path to your oh-my-zsh installation.
+export ZSH=$HOME/.oh-my-zsh
+
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
+# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="robbyrussell"
 
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+# Set list of themes to pick from when loading at random
+# Setting this variable when ZSH_THEME=random will cause zsh to load
+# a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
+# If set to an empty array, this variable will have no effect.
+# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
-alias py="/Library/Frameworks/Python.framework/Versions/3.3/bin/python3.3"
-alias pyvenv="/Library/Frameworks/Python.framework/Versions/3.3/bin/pyvenv-3.3"
-alias pip3="/Library/Frameworks/Python.framework/Versions/3.3/bin/pip-3.3"
-alias julia="/Applications/Julia-*.app/Contents/Resources/julia/bin/julia"
-alias ijulia="ipython3 notebook --profile=julia"
-alias mysql="/usr/local/mysql/bin/mysql"
-
-# boot up local server
-alias server="/usr/local/bin/python3 -m http.server"
-
-# b/c vim is awesome.
-alias v="/usr/bin/vim"
-alias v.="/usr/bin/vim ."
-
-alias p="cd ~/workspace/"
-
-# get the current directory's listing, in long format, including hidden directories
-alias ll="ls -lhA"
-
-# find files in our current directory easily
-alias fhere="find . -name "
-
-# list our disk usage in human-readable units including filesystem type, and print a total at the bottom
-alias df="df -ha"
-
-# make our process table searchable
-alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
-
-# we use often is the -p flag to make any necessary parent directories
-alias mkdir="mkdir -pv"
-
-# top
-# cpu
-alias cpu='top -o cpu'
-# memory
-alias mem='top -o rsize'
-
-# mute the system volume
-alias mute="osascript -e 'set volume output muted true'"
-alias unmute="osascript -e 'set volume output muted false'"
-
-# Set to this to use case-sensitive completion
+# Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
-# Uncomment this to disable bi-weekly auto-update checks
+# Uncomment the following line to use hyphen-insensitive completion.
+# Case-sensitive completion must be off. _ and - will be interchangeable.
+# HYPHEN_INSENSITIVE="true"
+
+# Uncomment the following line to disable bi-weekly auto-update checks.
 # DISABLE_AUTO_UPDATE="true"
 
-# Uncomment to change how often before auto-updates occur? (in days)
+# Uncomment the following line to automatically update without prompting.
+# DISABLE_UPDATE_PROMPT="true"
+
+# Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_ZSH_DAYS=13
 
-# Uncomment following line if you want to disable colors in ls
+# Uncomment the following line if pasting URLs and other text is messed up.
+# DISABLE_MAGIC_FUNCTIONS=true
+
+# Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
 
-# Uncomment following line if you want to disable autosetting terminal title.
+# Uncomment the following line to disable auto-setting terminal title.
 # DISABLE_AUTO_TITLE="true"
 
-# Uncomment following line if you want to disable command autocorrection
-# DISABLE_CORRECTION="true"
+# Uncomment the following line to enable command auto-correction.
+# ENABLE_CORRECTION="true"
 
-# Uncomment following line if you want red dots to be displayed while waiting for completion
+# Uncomment the following line to display red dots whilst waiting for completion.
 # COMPLETION_WAITING_DOTS="true"
 
-# Uncomment following line if you want to disable marking untracked files under
-# VCS as dirty. This makes repository status check for large repositories much,
-# much faster.
+# Uncomment the following line if you want to disable marking untracked files
+# under VCS as dirty. This makes repository status check for large repositories
+# much, much faster.
 # DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-# Uncomment following line if you want to  shown in the command execution time stamp 
-# in the history command output. The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|
-# yyyy-mm-dd
-# HIST_STAMPS="mm/dd/yyyy"
+# Uncomment the following line if you want to change the command execution time
+# stamp shown in the history command output.
+# You can set one of the optional three formats:
+# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# or set a custom format using the strftime function format specifications,
+# see 'man strftime' for details.
+HIST_STAMPS="mm/dd/yyyy"
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Would you like to use another custom folder than $ZSH/custom?
+# ZSH_CUSTOM=/path/to/new-custom-folder
+
+# Which plugins would you like to load?
+# Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git ruby python osx virtualenv tmux rvm rails pip heroku)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH="$PATH:/Users/ddinh/.rvm/gems/ruby-2.1.2/bin:/Users/ddinh/.rvm/gems/ruby-2.1.1/bin:/Users/ddinh/.rvm/bin:/Users/ddinh/julia:/usr/local/bin:/usr/local/mysql/bin:/usr/local/mysql/lib:/usr/local/share/npm/bin:/Users/ddinh/workspace/adt-bundle-mac-x86_64-20130514/sdk/platform-tools:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/go/bin:/usr/X11/bin:/Applications/Postgres.app/Contents/Versions/9.3/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
-# # Preferred editor for local and remote sessions
+# You may need to manually set your language environment
+# export LANG=en_US.UTF-8
+
+# Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
 # else
@@ -105,48 +89,37 @@ export PATH="$PATH:/Users/ddinh/.rvm/gems/ruby-2.1.2/bin:/Users/ddinh/.rvm/gems/
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
-# ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
+#
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# Uncomment following line if you want red dots to be displayed while waiting for completion
-COMPLETION_WAITING_DOTS="true"
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" --no-use  # This loads nvm. Adding --no-use to the end of the above script (...nvm.sh --no-use) to postpone using nvm until you manually use it.
+[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# PROMPT STUFF
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
 
-function virtualenv_info {
-    [ $VIRTUAL_ENV ] && echo '('`basename $VIRTUAL_ENV`') '
-}
+# Output from "/usr/libexec/java_home -v1.8"
+export JAVA_8_HOME="/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home"
 
-function hg_prompt_info {
-    $OH_MY_ZSH_HG prompt --angle-brackets "\
-< on %{$fg[magenta]%}<branch>%{$reset_color%}>\
-< at %{$fg[yellow]%}<tags|%{$reset_color%}, %{$fg[yellow]%}>%{$reset_color%}>\
-%{$fg[green]%}<status|modified|unknown><update>%{$reset_color%}<
-patches: <patches|join( → )|pre_applied(%{$fg[yellow]%})|post_applied(%{$reset_color%})|pre_unapplied(%{$fg_bold[black]%})|post_unapplied(%{$reset_color%})>>" 2>/dev/null
-}
+# Output from "/usr/libexec/java_home -v11"
+export JAVA_11_HOME="/Library/Java/JavaVirtualMachines/adoptopenjdk-11.jdk/Contents/Home"
 
-function box_name {
-    [ -f ~/.box-name ] && cat ~/.box-name || hostname -s
-}
+# set alias so we can toggle between different java versions
+alias java8="export JAVA_HOME=$JAVA_8_HOME"
+alias java11="export JAVA_HOME=$JAVA_11_HOME"
 
-PROMPT='
-%{$fg[magenta]%}%n%{$reset_color%} at %{$fg[yellow]%}$(box_name)%{$reset_color%} in %{$fg_bold[green]%}${PWD/#$HOME/~}%{$reset_color%}$(hg_prompt_info)$(git_prompt_info)
-$(virtualenv_info)%(?,,%{${fg_bold[white]}%}[%?]%{$reset_color%} )$ '
+# java shells
+alias jshell8='/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/bin/jshell'
+alias jshell11='/Library/Java/JavaVirtualMachines/adoptopenjdk-11.jdk/Contents/Home/bin/jshell'
 
-ZSH_THEME_GIT_PROMPT_PREFIX=" on %{$fg[magenta]%}"
-ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[green]%}!"
-ZSH_THEME_GIT_PROMPT_CLEAN=""
-
-local return_status="%{$fg[red]%}%(?..✘)%{$reset_color%}"
-RPROMPT='${return_status}%{$reset_color%}'
-
-# virtualenv stuff
-export WORKON_HOME=$HOME/.virtualenvs
-source $WORKON_HOME/pachamama3/bin/virtualenvwrapper.sh
-
-#activate nvm
-source ~/.nvm/nvm.sh
-
-# get mysql2 gem to find dyld lib
-export DYLD_LIBRARY_PATH=/usr/local/mysql/lib:$DYLD_LIBRARY_PATH
+# default to Java 8
+# Then to change versions, just use the alias e.g., java11
+# https://stackoverflow.com/a/52524114
+java8
