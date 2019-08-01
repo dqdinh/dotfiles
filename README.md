@@ -1,5 +1,11 @@
 # Notes
 
+## Python
+```
+# use pip3 to update various libraries e.g., awscli
+pip3 install awscli --upgrade --user
+```
+
 ## Ubuntu
 ```
 Super : brings up search
