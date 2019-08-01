@@ -98,20 +98,7 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" --no-use  # This loads nvm. Adding --no-use to the end of the above script (...nvm.sh --no-use) to postpone using nvm until you manually use it.
-[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-# Add RVM and others to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
-
-export PATH="$HOME/Library/Python/3.7/bin:$PATH"
-
-# Output from "/usr/libexec/java_home -v1.8"
-export JAVA_8_HOME="/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home"
-
-# Output from "/usr/libexec/java_home -v11"
-export JAVA_11_HOME="/Library/Java/JavaVirtualMachines/adoptopenjdk-11.jdk/Contents/Home"
+# NOTE Refer to .zshenv for custom modifications to $PATH referenced below
 
 # set alias so we can toggle between different java versions
 alias java8="export JAVA_HOME=$JAVA_8_HOME"
