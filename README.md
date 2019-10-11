@@ -1,5 +1,25 @@
 # Notes
 
+## GPG
+```bash
+# create an archive of mulitple files and encrypt
+tar -cf <file1> <file2>
+gpg --encrypt --recipient <name>
+
+# decrypt
+gpg --decrypt <file1_file2>.tar.gpg
+gpg -d file.gpg
+
+# generate new key
+gpg --full-generate-key
+
+# export public gpg key
+gpg --armor --export <key_id>
+
+# list all secret keys
+gpg --list-secret-keys --keyid-format LONG
+```
+
 ## Python
 ```
 # use pip3 to update various libraries e.g., awscli
