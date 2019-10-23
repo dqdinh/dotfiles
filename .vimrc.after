@@ -1,655 +1,381 @@
-" .vimrc File
-" Procured from: Jeffrey Way
-" jeffrey@jeffrey-way.com
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Maintainer:
+"       Amir Salihefendic — @amix3k
 "
-" Improved by: Garrett Dawson
-" killtheliterate@gmail.com
+" Awesome_version:
+"       Get this config, nice color schemes and lots of plugins!
 "
-" source -- https://github.com/jdavis/dotfiles/blob/master/.vimrc
-
-"Forget compatibility with Vi. Who cares.
-set nocompatible
-
+"       Install the awesome version from:
 "
-" Custom Functions
+"           https://github.com/amix/vimrc
 "
-
-" Remove trailing whitespace
-" http://vim.wikia.com/wiki/Remove_unwanted_spaces
-function! StripTrailingWhitespace()
-    if !&binary && &filetype != 'diff'
-        normal mz
-        normal Hmy
-        %s/\s\+$//e
-        normal 'yz<cr>
-        normal `z
-        retab
-    endif
-endfunction
-
-" Function to hide all the text except for the text selected in visual mode.
-" This is great for highlighting parts of the code. Just call the function
-" again to deselect everything.
-function! ToggleSelected(visual) range
-    highlight HideSelected ctermfg=bg ctermbg=bg
-                         \ guifg=bg guibg=bg gui=none term=none cterm=none
-
-    if exists('g:toggle_selected_hide')
-        call matchdelete(g:toggle_selected_hide)
-
-        unlet g:toggle_selected_hide
-        redraw
-
-        if !a:visual
-            return
-        endif
-    endif
-
-    let [lnum1, col1] = getpos(''<')[1:2]
-    let [lnum2, col2] = getpos(''>')[1:2]
-
-    let pattern = '\%^\|\%<'.lnum1.'l\|\%<'.col1.'v\|\%>'.lnum2.'l\|\%>'.col2.'v'
-    let g:toggle_selected_hide = matchadd('HideSelected', pattern, 1000)
-
-    redraw
-endfunction
-
-
+" Sections:
+"    -> General
+"    -> VIM user interface
+"    -> Colors and Fonts
+"    -> Files and backups
+"    -> Text, tab and indent related
+"    -> Visual mode related
+"    -> Moving around, tabs and buffers
+"    -> Status line
+"    -> Editing mappings
+"    -> vimgrep searching and cope displaying
+"    -> Spell checking
+"    -> Misc
+"    -> Helper functions
 "
-" Global Settings
-"
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-set nobackup
-set nowritebackup
-set noswapfile    " http://robots.thoughtbot.com/post/18739402579/global-gitignore#comment-458413287
 
-" The default 20 isn't nearly enough
-set history=9999
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => General
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Sets how many lines of history VIM has to remember
+set history=500
 
-"Enable filetypes
-filetype on
+" Enable filetype plugins
 filetype plugin on
 filetype indent on
 
-" Allows the backspace to delete indenting, end of lines, and over the start
-" of insert
-set backspace=indent,eol,start
-
-" Pretty colors
-syntax on
-
-" Show the matching when doing a search
-set showmatch
-
-" Always show the last line
-set display+=lastline
-
-" UTF-8
-set encoding=utf-8
-
-
-"Write the old file out when switching between files.
-set autowrite
-
-"Display current cursor position in lower right corner.
-set ruler
-
-"Want a different map leader than \
-let mapleader = "'"
-let maplocalleader = '\'
-
-"Ever notice a slight lag after typing the leader key + command? This lowers
-"the timeout.
-set timeoutlen=500
-
-"Tab stuff
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
-set expandtab
-
-"Show command in bottom right portion of the screen
-set showcmd
-
-" Disable beeping and flashing.
-set noerrorbells visualbell t_vb=
-autocmd GUIEnter * set visualbell t_vb=
-
-"Show no lines numbers
-set nonumber
-
-" Use smarter defaults
-set smartindent
-set smarttab
-set autoindent
-
-" Turn on persistent undo
-" Thanks, Mr Wadsten: github.com/mikewadsten/dotfiles/
-if has('persistent_undo')
-  set undodir=~/.vim/undo//
-  set undofile
-  set undolevels=1000
-  set undoreload=10000
-endif
-
-"Always show the status line
-set laststatus=2
-
-"Prefer a slightly higher line height
-set linespace=3
-
-"Better line wrapping
-set wrap
-set formatoptions=qrn1
-" For all text files set 'textwidth' to 78 characters.
-autocmd FileType text setlocal textwidth=78
-
-"Set incremental searching"
-set incsearch
-
-"Highlight searching
-set hlsearch
-
-" Don't show the startup message
-set shortmess=I
-
-" case insensitive search
-set ignorecase
-set smartcase
-
-"Hide MacVim toolbar by default
-set go-=T
-
-"Hard-wrap paragraphs of text
-nnoremap <leader>q gqip
-
-"Enable code folding
-set foldenable
-
-"Hide mouse when typing
-set mousehide
-
-"Shortcut to fold tags with leader (usually \) + ft
-nnoremap <leader>ft Vatzf
-
-"Opens a vertical split and switches over (\v)
-nnoremap <leader>v <C-w>v<C-w>l
-
-"Session settings
-set sessionoptions=resize,winpos,winsize,buffers,tabpages,folds,curdir,help
-
-"Set up an HTML5 template for all new .html files
-"autocmd BufNewFile * silent! 0r $VIMHOME/templates/%:e.tpl
-
-"Load the current buffer in Firefox - Mac specific.
-abbrev ff :! open -a firefox.app %:p<cr>
-
-"Map a change directory to the desktop - Mac specific
-nmap ,d :cd ~/Desktop<cr>:e.<cr>
-
-"Shortcut for editing  vimrc file in a new tab
-nmap ,ev :tabedit $MYVIMRC<cr>
-
-"Change zen coding plugin expansion key to shift + e
-let g:user_zen_expandabbr_key = '<C-e>'
-
-"Faster shortcut for commenting. Requires T-Comment plugin
-map ,/ <c-_><c-_>
-
-"Automatically change current directory to that of the file in the buffer
-" autocmd BufEnter * cd %:p:h
-
-" More useful command-line completion
-set wildmenu
-
-" Automatically re-read the file if it has changed
+" Set to auto read when a file is changed from the outside
 set autoread
 
-" Off on start
-set nofoldenable
+" With a map leader it's possible to do extra key combinations
+" like <leader>w saves the current file
+let mapleader = ","
 
-" Indent seems to work the best
-set foldmethod=indent
-set foldlevel=20
+" Fast saving
+nmap <leader>w :w!<cr>
 
-"Auto-completion menu
-set wildmode=list:longest
+" :W sudo saves the file
+" (useful for handling the permission-denied error)
+command W w !sudo tee % > /dev/null
 
-"http://vim.wikia.com/wiki/Make_Vim_completion_popup_menu_work_just_like_in_an_IDE
-set completeopt=longest,menuone
 
-"
-" Global Bindings
-"
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => VIM user interface
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Set 7 lines to the cursor - when moving vertically using j/k
+set so=7
 
-" Disable ex mode, ick, remap it to Q instead.
-"
-" Tip:
-"   Use command-line-window with q:
-"   Use search history with q/
-"
-" More info:
-" http://blog.sanctum.geek.nz/vim-command-window/
-nmap Q q
+" Turn on the Wild menu
+set wildmenu
 
-" Show only selected in Visual Mode
-nmap <silent> <leader>th :cal ToggleSelected(0)<cr>
-vmap <silent> <leader>th :cal ToggleSelected(1)<cr>
-
-" Split the window using some nice shortcuts
-nmap <leader>s<bar> :vsplit<cr>
-nmap <leader>s- :split<cr>
-
-" Unhighlight the last search pattern on Enter
-nn <silent> <cr> :nohlsearch<cr><cr>
-
-" Remove trailing whitespace
-nmap <leader>tW :cal StripTrailingWhitespace()<cr>
-
-" Control enhancements in insert mode
-imap <C-F> <right>
-imap <C-B> <left>
-imap <M-BS> <esc>vBc
-imap <C-P> <up>
-imap <C-N> <down>
-
-" When pushing j/k on a line that is wrapped, it navigates to the same line,
-" just to the expected location rather than to the next line
-nnoremap j gj
-nnoremap k gk
-
-" Arrow key users won't survive in this environment
-map <up> <nop>
-map <down> <nop>
-map <left> <nop>
-map <right> <nop>
-
-" Map Ctrl+V to paste in Insert mode
-imap <C-V> <C-R>*
-
-" Map Ctrl+C to copy in Visual mode
-vmap <C-C> "+y
-
-" Add paste shortcut
-nmap <leader>P "+p
-
-"Map escape key to jj -- much faster
-imap jj <esc>
-
-"Delete all buffers (via Derek Wyatt)
-nmap <silent> ,da :exec "1," . bufnr('$') . "bd"<cr>
-
-"Bubble single lines (kicks butt)
-"http://vimcasts.org/episodes/bubbling-text/
-nmap <C-Up> ddkP
-nmap <C-Down> ddp
-
-"Bubble multiple lines
-vmap <C-Up> xkP`[V`]
-vmap <C-Down> xp`[V`]
-
-" Source the vimrc file after saving it. This way, you don't have to reload
-" Vim to see the changes.
-if has("autocmd")
-  autocmd bufwritepost .vimrc source $MYVIMRC
+" Ignore compiled files
+set wildignore=*.o,*~,*.pyc
+if has("win16") || has("win32")
+    set wildignore+=.git\*,.hg\*,.svn\*
+else
+    set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
 endif
-"
-" easier window navigation
-nmap <C-h> <C-w>h
-nmap <C-j> <C-w>j
-nmap <C-k> <C-w>k
-nmap <C-l> <C-w>l
 
-" Ignore some defaults
-set wildignore=*.o,*.obj,*~,*.pyc
-set wildignore+=.env
-set wildignore+=.env[0-9]+
-set wildignore+=.git,.gitkeep
-set wildignore+=.tmp
-set wildignore+=.coverage
-set wildignore+=*DS_Store*
-set wildignore+=.sass-cache/
-set wildignore+=__pycache__/
-set wildignore+=vendor/rails/**
-set wildignore+=vendor/cache/**
-set wildignore+=*.gem
-set wildignore+=log/**
-set wildignore+=tmp/**
-set wildignore+=.tox/**
-set wildignore+=.idea/**
-set wildignore+=*.egg,*.egg-info
-set wildignore+=*.png,*.jpg,*.gif
-set wildignore+=*.so,*.swp,*.zip,*/.Trash/**,*.pdf,*.dmg,*/Library/**,*/.rbenv/**
-set wildignore+=*/.nx/**,*.app
+"Always show current position
+set ruler
 
-" Fold Keybindings
-"nnoremap <space> za
+" Height of the command bar
+set cmdheight=2
 
-"
-" Custom Settings
-"
+" A buffer becomes hidden when it is abandoned
+set hid
 
-" Set on textwidth when in markdown files
-autocmd FileType markdown set textwidth=80
+" Configure backspace so it acts as it should act
+set backspace=eol,start,indent
+set whichwrap+=<,>,h,l
 
-"------------------------"
-"NERDTREE PLUGIN SETTINGS
-"------------------------"
+" Ignore case when searching
+set ignorecase
 
-"Shortcut for NERDTreeToggle
-nmap ,nt :NERDTreeToggle
+" When searching try to be smart about cases
+set smartcase
 
-"Show hidden files in NerdTree
-let NERDTreeShowHidden=1
+" Highlight search results
+set hlsearch
 
-"customize window width
-let NERDTreeWinSize=30
+" Makes search act like search in modern browsers
+set incsearch
 
-"Prevent NT from replacing Netrw
-let NERDTreeHijackNetrw=0
+" Don't redraw while executing macros (good performance config)
+set lazyredraw
 
-" Netrw
-let g:netrw_altv          = 1
-let g:netrw_fastbrowse    = 2
-let g:netrw_keepdir       = 0
-let g:netrw_retmap        = 1
-let g:netrw_silent        = 1
-let g:netrw_special_syntax= 1
+" For regular expressions turn magic on
+set magic
 
-" Explorer
-nmap <leader>E :Explore<cr>
+" Show matching brackets when text indicator is over them
+set showmatch
+" How many tenths of a second to blink when matching brackets
+set mat=2
 
-"Helpeful abbreviations
-iab lorem Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-iab llorem Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+" No annoying sound on errors
+set noerrorbells
+set novisualbell
+set t_vb=
+set tm=500
 
-"Spelling corrects. Just for example. Add yours below.
-iab teh the
-iab Teh The
+" Properly disable sound on errors on MacVim
+if has("gui_macvim")
+    autocmd GUIEnter * set vb t_vb=
+endif
 
-"--------------------------"
-" PERSONAL SETTINGS
-" -------------------------"
 
-" testing out 256 colors
-" http://vim.wikia.com/wiki/256_colors_in_vim
-set t_Co=256
+" Add no extra margin to the left
+set foldcolumn=0
 
-" P a pause when leaving insert mode
-set timeout timeoutlen=1000 ttimeoutlen=50
 
-" Scrollbar junk
-set guioptions=aAce
-
-" Colors and fonts
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Colors and Fonts
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Enable syntax highlighting
 syntax enable
 
-" seoul256 (dark):
-"   Range:   233 (darkest) ~ 239 (lightest)
-"   Default: 237
-let g:seoul256_background = 235
-colorscheme seoul256
-if has('gui_running')
-  "Using a cool patched font for powerline
-  set guifont=Menlo:h14
-  "set background transparency and solarized style
-  set background=dark
-else
-    set background=dark
-    set mouse=a
+" Enable 256 colors palette in Gnome Terminal
+if $COLORTERM == 'gnome-terminal'
+    set t_Co=256
 endif
 
+try
+    colorscheme default
+catch
+endtry
 
-" Preserve indentation while pasting text from the OS X clipboard
-noremap <leader>p :set paste<CR>:put  *<CR>:set nopaste<CR>
+set background=dark
+
+" Set extra options when running in GUI mode
+if has("gui_running")
+    set guioptions-=T
+    set guioptions-=e
+    set t_Co=256
+    set guitablabel=%M\ %t
+endif
+
+" Set utf8 as standard encoding and en_US as the standard language
+set encoding=utf8
+
+" Use Unix as the standard file type
+set ffs=unix,dos,mac
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Files, backups and undo
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Turn backup off, since most stuff is in SVN, git et.c anyway...
+set nobackup
+set nowb
+set noswapfile
 
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" ScreenShell Support
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" For tmux support
-let g:ScreenImpl = 'Tmux'
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Text, tab and indent related
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Use spaces instead of tabs
+set expandtab
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Thoughtbot vimrc
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-augroup vimrcEx
-  autocmd!
+" Be smart when using tabs ;)
+set smarttab
 
-  " For all text files set 'textwidth' to 78 characters.
-  autocmd FileType text setlocal textwidth=78
+" 1 tab == 2 spaces
+set shiftwidth=2
+set tabstop=2
 
-  " When editing a file, always jump to the last known cursor position.
-  " Don't do it for commit messages, when the position is invalid, or when
-  " inside an event handler (happens when dropping a file on gvim).
-  autocmd BufReadPost *
-    \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
-    \   exe "normal g`\"" |
-    \ endif
+" Linebreak on 500 characters
+set lbr
+set tw=500
 
-  " Cucumber navigation commands
-  autocmd User Rails Rnavcommand step features/step_definitions -glob=**/* -suffix=_steps.rb
-  autocmd User Rails Rnavcommand config config -glob=**/* -suffix=.rb -default=routes
+set ai "Auto indent
+set si "Smart indent
+set wrap "Wrap lines
 
-  " Set syntax highlighting for specific file types
-  autocmd BufRead,BufNewFile Appraisals set filetype=ruby
-  autocmd BufRead,BufNewFile *.md set filetype=markdown
 
-  " Enable spellchecking for Markdown
-  autocmd BufRead,BufNewFile *.md setlocal spell
+""""""""""""""""""""""""""""""
+" => Visual mode related
+""""""""""""""""""""""""""""""
+" Visual mode pressing * or # searches for the current selection
+" Super useful! From an idea by Michael Naumann
+vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
+vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 
-  " Automatically wrap at 80 characters for Markdown
-  autocmd BufRead,BufNewFile *.md setlocal textwidth=80
-augroup END
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Moving around, tabs, windows and buffers
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
+map <space> /
+map <c-space> ?
 
-" Whitespace settings
+" Disable highlight when <leader><cr> is pressed
+map <silent> <leader><cr> :noh<cr>
 
-" Show trailing whitespace and tabs obnoxiously
-set list listchars=tab:▸\ ,trail:.
-set list
+" Smart way to move between windows
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
 
-fun! ToggleWhitespace()
-    ToggleBadWhitespace
-    if &list
-        set nolist
-    else
-        set list listchars=tab:▸\ ,trail:.
-        set list
-    endif
+" Close the current buffer
+map <leader>bd :Bclose<cr>:tabclose<cr>gT
+
+" Close all the buffers
+map <leader>ba :bufdo bd<cr>
+
+map <leader>l :bnext<cr>
+map <leader>h :bprevious<cr>
+
+" Useful mappings for managing tabs
+map <leader>tn :tabnew<cr>
+map <leader>to :tabonly<cr>
+map <leader>tc :tabclose<cr>
+map <leader>tm :tabmove
+map <leader>t<leader> :tabnext
+
+" Let 'tl' toggle between this and the last accessed tab
+let g:lasttab = 1
+nmap <Leader>tl :exe "tabn ".g:lasttab<CR>
+au TabLeave * let g:lasttab = tabpagenr()
+
+
+" Opens a new tab with the current buffer's path
+" Super useful when editing files in the same directory
+map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
+
+" Switch CWD to the directory of the open buffer
+map <leader>cd :cd %:p:h<cr>:pwd<cr>
+
+" Specify the behavior when switching between buffers
+try
+  set switchbuf=useopen,usetab,newtab
+  set stal=2
+catch
+endtry
+
+" Return to last edit position when opening files (You want this!)
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
+
+""""""""""""""""""""""""""""""
+" => Status line
+""""""""""""""""""""""""""""""
+" Always show the status line
+set laststatus=2
+
+" Format the status line
+set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Editing mappings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Remap VIM 0 to first non-blank character
+map 0 ^
+
+" Move a line of text using ALT+[jk] or Command+[jk] on mac
+nmap <M-j> mz:m+<cr>`z
+nmap <M-k> mz:m-2<cr>`z
+vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
+vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
+
+if has("mac") || has("macunix")
+  nmap <D-j> <M-j>
+  nmap <D-k> <M-k>
+  vmap <D-j> <M-j>
+  vmap <D-k> <M-k>
+endif
+
+" Delete trailing white space on save, useful for some filetypes ;)
+fun! CleanExtraSpaces()
+    let save_cursor = getpos(".")
+    let old_query = getreg('/')
+    silent! %s/\s\+$//e
+    call setpos('.', save_cursor)
+    call setreg('/', old_query)
 endfun
 
-nmap <leader>tw :cal ToggleWhitespace()<cr>
-
-
-" Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
-if executable('ag')
-  " Use Ag over Grep
-  set grepprg=ag\ --nogroup\ --nocolor
-
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+if has("autocmd")
+    autocmd BufWritePre *.txt,*.js,*.py,*.wiki,*.sh,*.coffee :call CleanExtraSpaces()
 endif
 
-" Treat <li> and <p> tags like the block tags they are
-let g:html_indent_tags = 'li\|p'
 
-" Open new split panes to right and bottom, which feels more natural
-set splitbelow
-set splitright
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Spell checking
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Pressing ,ss will toggle and untoggle spell checking
+map <leader>ss :setlocal spell!<cr>
 
-" Syntastic Settings
-let g:syntastic_always_populate_loc_list=1
-let g:syntastic_error_symbol = '✗'
-let g:syntastic_warning_symbol = '!'
-let g:syntastic_auto_loc_list = 2
-let g:syntastic_enable_signs = 1
-let g:syntastic_filetype_map = { 'rnoweb': 'tex'}
-
-" configure syntastic syntax checking to check on open as well as save
-let g:syntastic_check_on_open=1
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_mode_map = { 'passive_filetypes': ['html', 'sass', 'scss'] }
-let g:syntastic_html_tidy_ignore_errors=['trimming empty']
-
-let pyindent_nested_paren="&sw*2"
-let pyindent_open_paren="&sw*2"
-
-let g:mustache_abbreviations = 1
-
-" Indent Guide
-set smartindent
-set tabstop=2
-set shiftwidth=2
-set expandtab
-let g:indent_guides_enable_on_vim_startup = 1
-let g:indent_guides_start_level = 4
-let g:indent_guides_guide_size = 1
-
-:autocmd VimEnter * :IndentGuidesEnable
-
-" Airline options
-" A fancy status bar
-let g:Powerline_symbols = 'fancy'
-let g:airline_powerline_fonts = 1
-
-" Don't show seperators
-let g:airline_left_sep=''
-let g:airline_right_sep=''
-
-let g:airline_enable_branch = 1
-let g:airline_enable_syntastic = 1
-
-" Enable the list of buffers
-let g:airline#extensions#tabline#enabled = 1
-
-" Show just the filename
-let g:airline#extensions#tabline#fnamemod = ':t'"
-
-" MiniBufExpl Colors
-hi MBENormal               guifg=#808080 guibg=fg
-hi MBEChanged              guifg=#CD5907 guibg=fg
-hi MBEVisibleNormal        guifg=#5DC2D6 guibg=fg
-hi MBEVisibleChanged       guifg=#F1266F guibg=fg
-hi MBEVisibleActiveNormal  guifg=#A6DB29 guibg=fg
-hi MBEVisibleActiveChanged guifg=#F1266F guibg=fg
-
-" Buffer related modifactions
-" Switch between buffers without saving
-" This allows buffers to be hidden if you've modified a buffer.
-" This is almost a must if you wish to use buffers in this way.
-set hidden
-
-" To open a new empty buffer
-" This replaces :tabnew which I used to bind to this mapping
-nmap <leader>T :enew<cr>
-
-" Move to the next buffer
-nmap <leader>l :bnext<CR>
-
-" Move to the previous buffer
-nmap <leader>h :bprevious<CR>
-
-" Close the current buffer and move to the previous one
-" This replicates the idea of closing a tab
-nmap <leader>bq :bp <BAR> bd #<CR>
-
-" Show all open buffers and their status
-nmap <leader>bl :ls<CR>
-
-" Show last open buffer
-nmap <leader>pb :vs#
-
-" CtrlP Settings
-" Setup some default ignores
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](\.(git|hg|svn)|\_site)$',
-  \ 'file': '\v\.(exe|so|dll|class|png|jpg|jpeg)$',
-\}
-
-" Use the nearest .git directory as the cwd
-" This makes a lot of sense if you are working on a project that is in version
-" control. It also supports works with .svn, .hg, .bzr.
-let g:ctrlp_working_path_mode = 'r'
-
-" Use a leader instead of the actual named binding
-nmap <leader>p :CtrlP<cr>
-
-" Easy bindings for its various modes
-nmap <leader>bb :CtrlPBuffer<cr>
-nmap <leader>bm :CtrlPMixed<cr>
-nmap <leader>bs :CtrlPMRU<cr>
-nmap <leader>b5 :CtrlPClearCache<cr>
-
-" Use the right side of the screen
-let g:buffergator_viewport_split_policy = 'R'
-
-" I want my own keymappings...
-let g:buffergator_suppress_keymaps = 1
-
-" Looper buffers
-"let g:buffergator_mru_cycle_loop = 1
-
-" Go to the previous buffer open
-nmap <leader>jj :BuffergatorMruCyclePrev<cr>
-
-" Go to the next buffer open
-nmap <leader>kk :BuffergatorMruCycleNext<cr>
-
-" View the entire list of buffers open
-nmap <leader>bl :BuffergatorOpen<cr>
-
-" Shared bindings from Solution #1 from earlier
-nmap <leader>T :enew<cr>
-nmap <leader>bq :bp <BAR> bd #<cr>
-
-" Fugitive mapping
-nmap <leader>gb :Gblame<cr>
-nmap <leader>gc :Gcommit<cr>
-nmap <leader>gd :Gdiff<cr>
-nmap <leader>gg :Ggrep
-nmap <leader>gl :Glog<cr>
-nmap <leader>gp :Git pull<cr>
-nmap <leader>gP :Git push<cr>
-nmap <leader>gs :Gstatus<cr>
-nmap <leader>gw :Gbrowse<cr>
-
-" Easymotion
-map <space> <Plug>(easymotion-prefix)
-
-let g:EasyMotion_smartcase = 1
-map <space>h <Plug>(easymotion-lineforward)
-map <space>j <Plug>(easymotion-j)
-map <space>k <Plug>(easymotion-k)
-map <space>l <Plug>(easymotion-linebackward)
-
-let g:EasyMotion_startofline = 0
-
-" Undotree settings
-nmap <leader>tu :UndotreeToggle<cr>
-let g:undotree_SplitWidth = 30
-let g:undotree_WindowLayout = 3
-
-" Multiple Cursors Settings
-let g:multi_cursor_use_default_mapping = 0
-let g:multi_cursor_next_key = '<C-j>'
-let g:multi_cursor_prev_key = '<C-k>'
-let g:multi_cursor_skip_key = '<C-x>'
-let g:multi_cursor_quit_key = '<Esc>'
+" Shortcuts using <leader>
+map <leader>sn ]s
+map <leader>sp [s
+map <leader>sa zg
+map <leader>s? z=
 
 
-" Tagbar Options
-" Toggle Tagbar
-nmap <leader>tt :TagbarToggle<cr>
-let g:tagbar_left = 0
-let g:tagbar_width = 30
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Misc
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Remove the Windows ^M - when the encodings gets messed up
+noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
-let g:tagbar_type_css = {
-\ 'ctagstype' : 'Css',
-    \ 'kinds'     : [
-        \ 'c:classes',
-        \ 's:selectors',
-        \ 'i:identities'
-    \ ]
-\ }
+" Quickly open a buffer for scribble
+map <leader>q :e ~/buffer<cr>
+
+" Quickly open a markdown buffer for scribble
+map <leader>x :e ~/buffer.md<cr>
+
+" Toggle paste mode on and off
+map <leader>pp :setlocal paste!<cr>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Helper functions
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Returns true if paste mode is enabled
+function! HasPaste()
+    if &paste
+        return 'PASTE MODE  '
+    endif
+    return ''
+endfunction
+
+" Don't close window, when deleting a buffer
+command! Bclose call <SID>BufcloseCloseIt()
+function! <SID>BufcloseCloseIt()
+    let l:currentBufNum = bufnr("%")
+    let l:alternateBufNum = bufnr("#")
+
+    if buflisted(l:alternateBufNum)
+        buffer #
+    else
+        bnext
+    endif
+
+    if bufnr("%") == l:currentBufNum
+        new
+    endif
+
+    if buflisted(l:currentBufNum)
+        execute("bdelete! ".l:currentBufNum)
+    endif
+endfunction
+
+function! CmdLine(str)
+    call feedkeys(":" . a:str)
+endfunction
+
+function! VisualSelection(direction, extra_filter) range
+    let l:saved_reg = @"
+    execute "normal! vgvy"
+
+    let l:pattern = escape(@", "\\/.*'$^~[]")
+    let l:pattern = substitute(l:pattern, "\n$", "", "")
+
+    if a:direction == 'gv'
+        call CmdLine("Ack '" . l:pattern . "' " )
+    elseif a:direction == 'replace'
+        call CmdLine("%s" . '/'. l:pattern . '/')
+    endif
+
+    let @/ = l:pattern
+    let @" = l:saved_reg
+endfunction
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Custom settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" No line numbers
+set nonumber
