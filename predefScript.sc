@@ -4,8 +4,7 @@
 import coursier.MavenRepository
 
 // Import other maven repositories
-interp.repositories() ++= Seq(
-  MavenRepository("https://artifactory.prod.lkt.is/artifactory/repo"), MavenRepository("https://dl.bintray.com/ovotech/maven"))
+interp.repositories() ++= Seq(MavenRepository("https://dl.bintray.com/ovotech/maven"))
 
 // NOTE Compiler plugins imported without `.$plugin` are not loaded
 import $plugin.$ivy.`org.spire-math::kind-projector:0.9.8`
