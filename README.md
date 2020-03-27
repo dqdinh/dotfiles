@@ -132,6 +132,20 @@ To access the R session:
 ```
 
 #### Plant UML
+```
+#+begin_src plantuml
+version
+#+end_src
+
+#+begin_src plantuml
+licence
+#+end_src
+
+#+begin_src plantuml
+testdot
+#+end_src
+```
+
 ##### Graphviz
 ```
 #+begin_src plantuml :file ./diagrams/a-to-b-summary.jpg
