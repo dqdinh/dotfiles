@@ -30,21 +30,22 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
-     auto-completion
+     javascript
+     sql
+     (auto-completion :variables
+                      auto-completion-return-key-behavior 'complete
+                      auto-completion-tab-key-behavior 'cycle
+                      auto-completion-complete-with-key-sequence nil
+                      auto-completion-complete-with-key-sequence-delay 0.1
+                      auto-completion-private-snippets-directory nil)
      better-defaults
      csv
-     dash
-     emacs-lisp
-     evil-commentary
      git
      helm
      html
-     java
-     javascript
-     (markdown :variables markdown-live-preview-engine 'vmd)
+     markdown
      org
      plantuml
-     (restclient :variables restclient-use-org t)
      (ruby :variables
            ruby-insert-encoding-magic-comment nil
            ruby-test-runner 'rspec
@@ -53,7 +54,6 @@ values."
      (spell-checking :variables
                      ispell-program-name "aspell"
                      ispell-dictionary "en")
-     syntax-checking
      vinegar
      yaml
      (scala :variables
@@ -143,7 +143,7 @@ values."
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    dotspacemacs-default-font '("Dank Mono"
-                               :size 14
+                               :size 12
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -314,9 +314,12 @@ before packages are loaded. If you are unsure, you should try in setting them in
     (lambda()
       (require 'ob-emacs-lisp)
       (require 'ob-shell)
-      (require 'ob-restclient)
       (require 'ob-plantuml)
-      (setq org-plantuml-jar-path "/Users/david.dinh/workspace/plantuml.1.2019.7.jar")
+      (require 'ob-ditaa)
+      ;; https://plantuml.com/download
+      (setq org-plantuml-jar-path "/Users/david.dinh/workspace/configs/plantuml.1.2020.5.jar")
+      ;; brew install ditaa
+      (setq org-ditaa-jar-path "/usr/local/Cellar/ditaa/0.11.0_1/libexec/ditaa-0.11.0-standalone.jar")
 
       (setq org-capture-templates '(
                                     ("t" "Task" entry
@@ -328,34 +331,6 @@ before packages are loaded. If you are unsure, you should try in setting them in
              (
               "/Users/david.dinh/workspace/org/inbox.org"
               )))
-
-      (setq org-agenda-custom-commands
-            '(
-              ("O" "Office block agenda"
-               ((agenda "" ((org-agenda-span 1)))
-                ;; limits the agenda display to a single day
-                (tags-todo "+PRIORITY=\"A\"")
-                (tags-todo "computer|office|phone|email|work")
-                (tags "review" ((org-agenda-files '("/Users/david.dinh/workspace/org/inbox.org"))))
-                ;; limits the tag search to the file circuspeanuts.org
-                (todo "WAITING"))
-               ((org-agenda-compact-blocks t))) ;; options set here apply to the entire block
-
-              ("W" "Weekly Review"
-               ((agenda "" ((org-agenda-span 7))); review upcoming deadlines and appointments
-                                        ; type "l" in the agenda to review logged items
-                (stuck "") ; review stuck projects as designated by org-stuck-projects
-                (todo "PROJECT") ; review all projects (assuming you use todo keywords to designate projects)
-                (todo "MAYBE") ; review someday/maybe items
-                (todo "WAITING"))) ; review waiting items
-
-              ("c" "Weekly Calendar" agenda ""
-               ((org-agenda-span 7)                          ;; [1]
-                (org-agenda-start-on-weekday 0)               ;; [2]
-                (org-agenda-time-grid nil)
-                (org-agenda-repeating-timestamp-show-all t)   ;; [3]
-                (org-agenda-entry-types '(:timestamp :sexp))))  ;; [4]
-              ))
 
       (setq org-refile-allow-creating-parent-nodes 'confirm)
 
@@ -396,9 +371,8 @@ before packages are loaded. If you are unsure, you should try in setting them in
       (setq org-todo-keywords
             (quote
              ((sequence "TODO(t)" "|" "DONE(d)" "CANCELLED(c)")
-              (sequence "FEATURE(f)" "|" "COMPLETED(c)")
-              (sequence "BUG(b)" "|" "FIXED(x)")
-              (sequence "APPT(p)" "|" "DONE(d)" "CANCELLED(a)")
+              (sequence "VERIFY(v)" "|" "DONE(d)")
+              (sequence "BUG(b)" "|" "DONE(d)")
               (sequence "WAITING(w!)" "|" "DONE(d)"))))
       (setq org-export-babel-evaluate nil)
       (setq org-confirm-babel-evaluate nil)))
@@ -415,6 +389,6 @@ you should place your code here."
   (setq projectile-enable-caching t)
   (setq-default js2-basic-offset 2)
   (setq-default js-indent-level 2)
-  (setq magit-repository-directories '("/Users/david.dinh/workspace/oss" "/Users/david.dinh/workspace/projects"))
-  (setq-default flycheck-scalastylerc "/Users/david.dinh/workspace/configs/scalastyle_config.xml")
+  (setq magit-repository-directories '("/Users/david.dinh/workspace/oss" "/Users/david.dinh/workspace/"))
   )
+
