@@ -134,7 +134,7 @@ To access the R session:
 #### Plant UML
 ##### Graphviz
 ```
-#+begin_src plantuml :file ./diagrams/appmgmt-saml-sso-flow-summary.jpg
+#+begin_src plantuml :file ./diagrams/a-to-b-summary.jpg
 start
 :A;
 while (B) is (no)
@@ -146,6 +146,7 @@ stop
 ```
 ##### Sequence
 ```
+#+begin_src plantuml :file ./diagrams/c-to-s-summary.jpg
  autonumber "<font color=red><b>"
  
  title A -> B
@@ -155,4 +156,5 @@ stop
  
  c -[#0000FF]-> s : // Create client session,\n// send browser to requested destination
  s -> c : HTTP/1.1 200 OK \n { JSON Response }
+#+end_src
 ```
