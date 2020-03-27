@@ -64,31 +64,6 @@ control + b + n       : next tmux tab
 
 ## ZSH (https://github.com/robbyrussell/oh-my-zsh)
 
-## Fish (https://github.com/oh-my-fish/oh-my-fish)
-NVM
-```bash
-nvm list
-nvm use stable
-
-# Update stable and reinstall all packages
-nvm install stable --reinstall-packages-from=node 
-```
-
-NVM on Fish
-```
-# Install omf
-1. curl -L https://get.oh-my.fish | fish
-
-# Install bass
-2. omf install bass
-
-# Install NVM
-3. curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
-
-# use NVM or add this as a function inside the fish config
-4. bass source ~/.nvm/nvm.sh --no-use ';' nvm use default
-```
-
 ## Most used IntelliJ Shortcuts / Keyboard Mappings
 ```
 command b                            : go to definition
@@ -140,3 +115,44 @@ C-c C-c
 
 To access the R session:
 (helm-M-x nil "org-babel-switch-to-session")
+
+#### Ditaa
+```
+#+begin_src ditaa :file ./diagrams/some_filename.png
++--------+   +-------+    +-------+
+|        +---+ ditaa +--> |       |
+|  Text  |   +-------+    |diagram|
+|Document|   |!magic!|    |       |
+|     {d}|   |       |    |       |
++---+----+   +-------+    +-------+
+	:                         ^
+	|       Lots of work      |
+	+-------------------------+
+#+end_src
+```
+
+#### Plant UML
+##### Graphviz
+```
+#+begin_src plantuml :file ./diagrams/appmgmt-saml-sso-flow-summary.jpg
+start
+:A;
+while (B) is (no)
+  :C;
+endwhile (yes)
+:D;
+stop
+#+end_src
+```
+##### Sequence
+```
+ autonumber "<font color=red><b>"
+ 
+ title A -> B
+ 
+ participant "Client" as c
+ participant "Server" as s
+ 
+ c -[#0000FF]-> s : // Create client session,\n// send browser to requested destination
+ s -> c : HTTP/1.1 200 OK \n { JSON Response }
+```
