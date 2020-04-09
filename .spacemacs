@@ -388,7 +388,8 @@ explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
   (setq projectile-enable-caching t)
   (setq-default js2-basic-offset 2)
+  (setq-default c-basic-offset 2)
   (setq-default js-indent-level 2)
   (setq magit-repository-directories '("/Users/david.dinh/workspace/oss" "/Users/david.dinh/workspace/"))
-  )
+)
 
