@@ -55,6 +55,10 @@ values."
                      ispell-program-name "aspell"
                      ispell-dictionary "en")
      vinegar
+     (version-control :variables
+                      version-control-diff-tool 'git-gutter
+                      version-control-diff-side 'left)
+
      yaml
      (scala :variables
             scala-auto-insert-asterisk-in-comments t
