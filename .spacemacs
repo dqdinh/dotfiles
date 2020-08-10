@@ -32,14 +32,15 @@ values."
    '(
      javascript
      sql
+     ;; Add tool tips to show doc string of functions
+     ;; Show snippets in the autocompletion popup
+     ;; Show suggestions by most commonly used
      (auto-completion :variables
-                      auto-completion-return-key-behavior 'complete
-                      auto-completion-tab-key-behavior 'cycle
-                      auto-completion-complete-with-key-sequence nil
-                      auto-completion-complete-with-key-sequence-delay 0.1
-                      auto-completion-private-snippets-directory nil)
+                       auto-completion-enable-help-tooltip t
+                       auto-completion-enable-snippets-in-popup t
+                       auto-completion-enable-sort-by-usage t)
      better-defaults
-     csv
+     ;;csv
      git
      helm
      html
@@ -50,19 +51,24 @@ values."
            ruby-insert-encoding-magic-comment nil
            ruby-test-runner 'rspec
            ruby-version-manager 'rvm)
+
+     java
+
+     ;; (scala :variables
+     ;;       scala-auto-insert-asterisk-in-comments t
+     ;;       scala-indent:use-javadoc-style t)
+
      shell-scripts
+
      (spell-checking :variables
                      ispell-program-name "aspell"
                      ispell-dictionary "en")
-     vinegar
+
      (version-control :variables
                       version-control-diff-tool 'git-gutter
                       version-control-diff-side 'left)
-
+     vinegar
      yaml
-     (scala :variables
-            scala-auto-insert-asterisk-in-comments t
-            scala-indent:use-javadoc-style t)
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -320,67 +326,10 @@ before packages are loaded. If you are unsure, you should try in setting them in
       (require 'ob-shell)
       (require 'ob-plantuml)
       (require 'ob-ditaa)
-      ;; https://plantuml.com/download
-      (setq org-plantuml-jar-path "/Users/david.dinh/workspace/configs/plantuml.1.2020.5.jar")
-      ;; brew install ditaa
+      (setq org-plantuml-jar-path "/Users/dd/workspace/configs/plantuml.1.2020.15.jar")
       (setq org-ditaa-jar-path "/usr/local/Cellar/ditaa/0.11.0_1/libexec/ditaa-0.11.0-standalone.jar")
 
-      (setq org-capture-templates '(
-                                    ("t" "Task" entry
-                                     (file+headline "/Users/david.dinh/workspace/org/inbox.org" "Inbox")
-                                     "* TODO %i%? \n %U")
-                                    ))
-      (setq org-agenda-files
-            (quote
-             (
-              "/Users/david.dinh/workspace/org/inbox.org"
-              )))
-
-      (setq org-refile-allow-creating-parent-nodes 'confirm)
-
-      (setq org-M-RET-may-split-line (quote ((default))))
-      (setq org-agenda-default-appointment-duration 60)
-
-      (setq org-agenda-log-mode-items (quote (closed clock state)))
-      (setq org-agenda-restore-windows-after-quit t)
-      (setq org-agenda-show-future-repeats nil)
-      (setq org-agenda-span (quote week))
-      (setq org-capture-use-agenda-date t)
-      (setq org-clock-clocked-in-display (quote mode-line))
-      (setq org-clock-in-resume t)
-      (setq org-clock-mode-line-total (quote today))
-      (setq org-clock-out-remove-zero-time-clocks t)
-      (setq org-clock-persist t)
-      (setq org-columns-default-format "%60ITEM(Task) %10Effort(Estimated Effort){:} %10CLOCKSUM")
-      (setq org-deadline-warning-days 10)
-      (setq org-duration-format (quote h:mm))
-      (setq org-enforce-todo-checkbox-dependencies t)
-      (setq org-enforce-todo-dependencies t)
-      (setq org-export-taskjuggler-target-version 3)
-      (setq org-fontify-done-headline t)
-      (setq org-global-properties (quote (("Effort_ALL" . "1h 2h 4h 6h 8h 16h"))))
-      (setq org-habit-graph-column 52)
-      (setq org-hide-leading-stars t)
-      (setq org-highlight-latex-and-related (quote (latex)))
-      (setq org-indent-indentation-per-level 1)
-      (setq org-log-done (quote time))
-      (setq org-log-into-drawer t)
-      (setq org-startup-folded t)
-      (setq org-stuck-projects (quote ("+LEVEL=2/-DONE" ("TODO" "NEXT") nil "")))
-      (setq org-tags-column -80)
-      (setq org-tags-exclude-from-inheritance (quote ("project")))
-      (setq org-time-clocksum-format
-            (quote
-             (:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t)))
-      (setq org-todo-keywords
-            (quote
-             ((sequence "TODO(t)" "|" "DONE(d)" "CANCELLED(c)")
-              (sequence "VERIFY(v)" "|" "DONE(d)")
-              (sequence "BUG(b)" "|" "DONE(d)")
-              (sequence "WAITING(w!)" "|" "DONE(d)"))))
-      (setq org-export-babel-evaluate nil)
-      (setq org-confirm-babel-evaluate nil)))
-  )
+  )))
 
 (defun dotspacemacs/user-config ()
   (ido-mode -1)
@@ -392,8 +341,10 @@ explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
   (setq projectile-enable-caching t)
   (setq-default js2-basic-offset 2)
-  (setq-default c-basic-offset 2)
   (setq-default js-indent-level 2)
-  (setq magit-repository-directories '("/Users/david.dinh/workspace/oss" "/Users/david.dinh/workspace/"))
-)
-
+  (setq-default c-basic-offset 2)
+  (setq magit-repository-directories '("/Users/dd/workspace/oss"))
+  (setq lsp-ui-flycheck-live-reporting nil)
+  (setq lsp-ui-sideline-enable nil)
+  (setq lsp-ui-sideline-show-diagnostics nil)
+  )
