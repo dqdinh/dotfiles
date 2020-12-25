@@ -1,6 +1,11 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+# Add /bins for:
+# - doom emacs
+# - rbenv
+export PATH="$HOME/.emacs.d/bin:$HOME/.rbenv/bin:$PATH"
+
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
@@ -101,14 +106,20 @@ source $ZSH/oh-my-zsh.sh
 # NOTE Refer to .zshenv for custom modifications to $PATH referenced below
 
 # set alias so we can toggle between different java versions
-alias java8="export JAVA_HOME=$JAVA_8_HOME"
+# alias java8="export JAVA_HOME=$JAVA_8_HOME"
 alias java11="export JAVA_HOME=$JAVA_11_HOME"
 
 # java shells
-alias jshell8='/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/bin/jshell'
+# alias jshell8='/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/bin/jshell'
 alias jshell11='/Library/Java/JavaVirtualMachines/adoptopenjdk-11.jdk/Contents/Home/bin/jshell'
 
 # default to Java 8
 # Then to change versions, just use the alias e.g., java11
 # https://stackoverflow.com/a/52524114
-java8
+java11
+
+# algs4
+# export CLASSPATH=$CLASSPATH:~/workspace/study/algs4/libs/algs4.jar
+
+# Hook rbenv into shell
+eval "$(rbenv init -)"
