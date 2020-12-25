@@ -1,4 +1,6 @@
 # Notes
+## VIM
+https://github.com/amix/vimrc
 
 ## GPG
 ```bash
