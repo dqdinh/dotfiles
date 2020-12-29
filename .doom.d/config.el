@@ -36,6 +36,9 @@
       lsp-lens-enable nil
       lsp-headerline-breadcrumb-enable nil
 
+      ;; Global line wrap
+      global-visual-line-mode t
+
       ;; More common use-case
       ;; The ":s" command changes every occurrence on the line by default,
       ;; and changes only one occurrence on the line with the global flag.
