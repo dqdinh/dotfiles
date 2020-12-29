@@ -41,7 +41,7 @@ SHIFT 9
 # Create directory
 \+ (SHIFT =)
 
-# Mark and Delete directory
+# Mark and execute deletion
 d
 x
 
@@ -72,7 +72,29 @@ u
 
 # Copy
 SHIFT c
+
+# Move
+SHIFT r
+
+# Move/copy multiple things
+m 'or' t
+SHIFT r 'or' SHIFT c
+
+# Insert and rename
+
+;; enters Editable Dired mode'
+i
+
+;; Insert, modify, and save
+i
+ESC
+:w
+
+# Exit Editable Dired Mode
+C-c C-c
+
 ```
+
 
 ## Org mode
 ### Troubleshooting
