@@ -24,7 +24,8 @@
       ;; need for completion all the time -- as we type, as we breathe, as we
       ;; pray to the ancient ones -- but how often do you *really* need that
       ;; information? I say rarely. So opt for manual completion:
-      company-idle-delay nil
+      ;; TODO bind key to manual completion for lsp with childframe.
+      ;;company-idle-delay nil
 
       ;; LSP config
       ;; https://emacs-lsp.github.io/lsp-mode/tutorials/how-to-turn-off/
