@@ -39,7 +39,7 @@ SPC o -
 SHIFT 9
 
 # Create directory
-\+ (SHIFT =)
++ (SHIFT =)
 
 # Mark and execute deletion
 d
@@ -56,7 +56,7 @@ SHIFT m
 SHIFT o
 
 # Mark all directories
-\* / (SHIFT 8 /)
+* / (SHIFT 8 /)
 
 # Toggle / invert between (un)marked files and directories
 t
