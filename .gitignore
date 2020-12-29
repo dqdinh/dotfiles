@@ -1,0 +1,6 @@
+# emacs
+eshell/history
+eshell/lastdir
+*.elc
+org-roam.db
+custom.el
