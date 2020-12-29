@@ -1,4 +1,3 @@
-# Notes
 ## Emacs
 ### Doom
 
