@@ -1,84 +1,69 @@
 # Notes
-## VIM
-https://github.com/amix/vimrc
+## Emacs
+### Doom
 
-## GPG
-```bash
-# create an archive of mulitple files and encrypt
-tar -cf <file1> <file2>
-gpg --encrypt --recipient <name>
-
-# decrypt
-gpg --decrypt <file1_file2>.tar.gpg
-gpg -d file.gpg
-
-# generate new key
-gpg --full-generate-key
-
-# export public gpg key
-gpg --armor --export <key_id>
-
-# list all secret keys
-gpg --list-secret-keys --keyid-format LONG
 ```
+## Projectile
 
-## Python
-```
-# use pip3 to update various libraries e.g., awscli
-pip3 install awscli --upgrade --user
-```
+# Find file
+SPC f or SPC .
 
-## Ubuntu
-```
-Super : brings up search
-```
+# Find file from here
+SPC F
 
-## General Setup
-- emacs with spacemacs or DIY
-- nvm
-- tmux with oh-my-tmux config or DIY
-- shells: fish (bass, oh-my-fish) or zsh (oh-my-zsh)
-- plantuml jar via sourceforge
-- aspell
+# Manual indexing
+projectile-discover-projects-in-directory
+projectile-discover-projects-in-search-path
 
-### Packages worth jotting down
-```
-# Java
-# - this requires adding the openjdk apt repository
-sudo apt-get install adoptopenjdk-11-hotspot
+# Switch to project
+SPC p p
 
-# Customize keyboard keys
-# - swap super key with alt key
-# - caps lock replace with control
-sudo apt-get install gnome-tweak-tool
+# Switch to doom config files
+SPC p p
 
-# Check that emacs package is latest before installing
-sudo apt-get install emacs
-```
+## Dired
 
-## Oh My Tmux (https://github.com/gpakosz/.tmux)
-```
-control + b + Enter   : vim visual mode / copy and paste / keyboard scroll
-control + b + - / _   : horizontal split / vertical split
-control + b + c       : new tmux tab 
-control + b + n       : next tmux tab
-```
+# Enter Dired mode
+SPC o -
 
-## ZSH (https://github.com/robbyrussell/oh-my-zsh)
+# Toggle details
+SHIFT 9
 
-## Most used IntelliJ Shortcuts / Keyboard Mappings
+# Create directory
+\+ (SHIFT =)
+
+# Mark and Delete directory
+d
+x
+
+# Sort by name / date
+o
+
+# Modify permissions
+SHIFT m
+.e.g, 'u+w', 'u-w', 'u+w,g-w' 
+
+# Change owner
+SHIFT o
+
+# Mark all directories
+\* / (SHIFT 8 /)
+
+# Toggle / invert between (un)marked files and directories
+t
+
+# Unset marked files and directories
+SHIFT u
+
+# Single select / mark
+m
+
+# Unmark
+u
+
+# Copy
+SHIFT c
 ```
-command b                            : go to definition
-command shift p                       : type info
-command e                             : recent files
-command 7                             : show method structure
-command n                             : go to class
-command shift n                       : go to file
-command shift alt n / control shift n : navigate to symbol
-command alt <- / shift <-             : Pop back to the previously visited position in current file
-command alt -> / shift ->             : Pop forward to the previously visited position in current file
-```
-## Emacs (https://github.com/syl20bnr/spacemacs)
 
 ### Org mode
 #### Troubleshooting
@@ -160,6 +145,7 @@ endwhile (yes)
 stop
 #+end_src
 ```
+
 ##### Sequence
 ```
 #+begin_src plantuml :file ./diagrams/c-to-s-summary.jpg
@@ -173,4 +159,84 @@ stop
  c -[#0000FF]-> s : // Create client session,\n// send browser to requested destination
  s -> c : HTTP/1.1 200 OK \n { JSON Response }
 #+end_src
+```
+
+## VIM
+https://github.com/amix/vimrc
+
+## GPG
+```bash
+# create an archive of mulitple files and encrypt
+tar -cf <file1> <file2>
+gpg --encrypt --recipient <name>
+
+# decrypt
+gpg --decrypt <file1_file2>.tar.gpg
+gpg -d file.gpg
+
+# generate new key
+gpg --full-generate-key
+
+# export public gpg key
+gpg --armor --export <key_id>
+
+# list all secret keys
+gpg --list-secret-keys --keyid-format LONG
+```
+
+## Python
+```
+# use pip3 to update various libraries e.g., awscli
+pip3 install awscli --upgrade --user
+```
+
+## Ubuntu
+```
+Super : brings up search
+```
+
+## General Setup
+- emacs with spacemacs or DIY
+- nvm
+- tmux with oh-my-tmux config or DIY
+- shells: fish (bass, oh-my-fish) or zsh (oh-my-zsh)
+- plantuml jar via sourceforge
+- aspell
+
+### Packages worth jotting down
+```
+# Java
+# - this requires adding the openjdk apt repository
+sudo apt-get install adoptopenjdk-11-hotspot
+
+# Customize keyboard keys
+# - swap super key with alt key
+# - caps lock replace with control
+sudo apt-get install gnome-tweak-tool
+
+# Check that emacs package is latest before installing
+sudo apt-get install emacs
+```
+
+## Oh My Tmux (https://github.com/gpakosz/.tmux)
+```
+control + b + Enter   : vim visual mode / copy and paste / keyboard scroll
+control + b + - / _   : horizontal split / vertical split
+control + b + c       : new tmux tab 
+control + b + n       : next tmux tab
+```
+
+## ZSH (https://github.com/robbyrussell/oh-my-zsh)
+
+## Most used IntelliJ Shortcuts / Keyboard Mappings
+```
+command b                            : go to definition
+command shift p                       : type info
+command e                             : recent files
+command 7                             : show method structure
+command n                             : go to class
+command shift n                       : go to file
+command shift alt n / control shift n : navigate to symbol
+command alt <- / shift <-             : Pop back to the previously visited position in current file
+command alt -> / shift ->             : Pop forward to the previously visited position in current file
 ```
