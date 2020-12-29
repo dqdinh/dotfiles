@@ -1,5 +1,15 @@
-## Emacs
-### Doom
+- [emacs](#emacs)
+- [vim](#vim)
+- [gpg](#gpg)
+- [python](#python)
+- [ubuntu](#ubuntu)
+- [general](#general)
+- [tmux](#tmux)
+- [zsh](#zsh)
+- [intellij](#intellij)
+
+# Emacs
+## Doom
 
 ```
 ## Projectile
@@ -64,8 +74,8 @@ u
 SHIFT c
 ```
 
-### Org mode
-#### Troubleshooting
+## Org mode
+### Troubleshooting
 - if you can't evalutate code in org mode, try the following:
 
 ```
@@ -75,7 +85,7 @@ find org* -name "*.elc" -delete
 ```
 https://emacs.stackexchange.com/questions/32001/org-babel-9-spacemacs-unable-to-evaluate-org-babel-src-blocks
 
-#### Org Tangle Example
+### Org Tangle Example
 ```
 #+BEGIN_SRC R :session :results output :tangle yes
 #+END_SRC
@@ -102,7 +112,7 @@ C-c C-c
 To access the R session:
 (helm-M-x nil "org-babel-switch-to-session")
 
-#### Ditaa
+### Ditaa
 ```
 #+begin_src ditaa :file ./diagrams/some_filename.png
 +--------+   +-------+    +-------+
@@ -117,7 +127,7 @@ To access the R session:
 #+end_src
 ```
 
-#### Plant UML
+### Plant UML
 ```
 #+begin_src plantuml
 version
@@ -132,7 +142,7 @@ testdot
 #+end_src
 ```
 
-##### Graphviz
+### Graphviz
 ```
 #+begin_src plantuml :file ./diagrams/a-to-b-summary.jpg
 start
@@ -145,7 +155,7 @@ stop
 #+end_src
 ```
 
-##### Sequence
+### Sequence
 ```
 #+begin_src plantuml :file ./diagrams/c-to-s-summary.jpg
  autonumber "<font color=red><b>"
@@ -160,10 +170,10 @@ stop
 #+end_src
 ```
 
-## VIM
+# VIM
 https://github.com/amix/vimrc
 
-## GPG
+# GPG
 ```bash
 # create an archive of mulitple files and encrypt
 tar -cf <file1> <file2>
@@ -183,26 +193,26 @@ gpg --armor --export <key_id>
 gpg --list-secret-keys --keyid-format LONG
 ```
 
-## Python
+# Python
 ```
 # use pip3 to update various libraries e.g., awscli
 pip3 install awscli --upgrade --user
 ```
 
-## Ubuntu
+# Ubuntu
 ```
 Super : brings up search
 ```
 
-## General Setup
-- emacs with spacemacs or DIY
+# General
+- emacs
 - nvm
 - tmux with oh-my-tmux config or DIY
-- shells: fish (bass, oh-my-fish) or zsh (oh-my-zsh)
-- plantuml jar via sourceforge
+- shells: zsh (oh-my-zsh)
+- plantuml
 - aspell
 
-### Packages worth jotting down
+## Packages worth jotting down
 ```
 # Java
 # - this requires adding the openjdk apt repository
@@ -217,7 +227,9 @@ sudo apt-get install gnome-tweak-tool
 sudo apt-get install emacs
 ```
 
-## Oh My Tmux (https://github.com/gpakosz/.tmux)
+# Tmux
+https://github.com/gpakosz/.tmux
+
 ```
 control + b + Enter   : vim visual mode / copy and paste / keyboard scroll
 control + b + - / _   : horizontal split / vertical split
@@ -225,9 +237,10 @@ control + b + c       : new tmux tab
 control + b + n       : next tmux tab
 ```
 
-## ZSH (https://github.com/robbyrussell/oh-my-zsh)
+# ZSH
+https://github.com/robbyrussell/oh-my-zsh
 
-## Most used IntelliJ Shortcuts / Keyboard Mappings
+# IntelliJ
 ```
 command b                            : go to definition
 command shift p                       : type info
