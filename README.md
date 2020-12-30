@@ -12,7 +12,9 @@
 ## Doom
 
 ```
-## Projectile
+Source - https://youtube.com/playlist?list=PLhXZp00uXBk4np17N39WvB80zgxlZfVwj
+
+== Projectile ==
 
 # Find file
 SPC f or SPC .
@@ -30,7 +32,7 @@ SPC p p
 # Switch to doom config files
 SPC p p
 
-## Dired
+== Dired ==
 
 # Enter Dired mode
 SPC o -
@@ -93,6 +95,36 @@ ESC
 # Exit Editable Dired Mode
 C-c C-c
 
+== Buffers ==
+
+# Query workspace buffers
+SPC b b
+SPC .
+
+# Query all buffers
+SPC b B
+SPC <
+
+# Create and save new buffer
+SPC b N
+SPC b s
+
+# Open ibuffer
+SPC b i
+
+# Mark and delete
+d
+x
+
+== Windows ==
+# Vertical / horizontal
+C-w v 'or' C-w s
+
+# Movement
+C-w w or C-w hjkl
+
+# resize
+C-w < > + -
 ```
 
 
