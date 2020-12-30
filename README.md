@@ -12,7 +12,7 @@
 ## Doom
 
 ```
-Source - https://youtube.com/playlist?list=PLhXZp00uXBk4np17N39WvB80zgxlZfVwj
+Doomcasts - https://youtube.com/playlist?list=PLhXZp00uXBk4np17N39WvB80zgxlZfVwj
 
 == Projectile ==
 
@@ -168,16 +168,35 @@ f 'or' t
 ; 'or' ,
 
 == Avy ==
-Longer distance navigation
+Longer distance navigation.
 
-# Go to char sequence
-g s SPC
+# Variable: avy-all-windows or avy-all-windows-alt
+Toggle to 't' to search across windows.
+avy-all-windows-alt defaults to 't' in Doom
+
+# Go to char sequence (go-to command)
+g s SPC <chars>
+
+# find and cut
+g s SPC <chars> x
+g s SPC <chars> X (stay in current window)
+
+# find and autocorrect
+g s SPC <chars> i
+g s SPC <chars> I (stays in current window)
+
+# find and move / yank
+g s SPC <chars> y
+
+# find and teleport
+g s SPC <chars> t 
+
 
 # Go to char-2
-g s s
+g s s <char-2>
 
 # Go to char-timer
-g s /
+g s / <chars>
 
 ```
 
