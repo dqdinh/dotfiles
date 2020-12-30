@@ -8,14 +8,14 @@
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets.
 (setq user-full-name "dd"
-      user-mail-address "dd@lambda"
+      user-mail-address "dd@lambda.local"
 
       doom-scratch-initial-major-mode 'lisp-interaction-mode
 
       ;;treemacs-width 32
 
-       ;; This determines the style of line numbers in effect. If set to `nil', line
-       ;; numbers are disabled. For relative line numbers, set this to `relative'.
+      ;; This determines the style of line numbers in effect. If set to `nil', line
+      ;; numbers are disabled. For relative line numbers, set this to `relative'.
       ;; NOTE Line numbers are pretty slow all around. The performance boost of
       ;; disabling them outweighs the utility of always keeping them on.
       display-line-numbers-type nil
@@ -24,7 +24,6 @@
       ;; need for completion all the time -- as we type, as we breathe, as we
       ;; pray to the ancient ones -- but how often do you *really* need that
       ;; information? I say rarely. So opt for manual completion:
-      ;; TODO bind key to manual completion for lsp with childframe.
       ;;company-idle-delay nil
 
       ;; LSP config
@@ -38,7 +37,7 @@
       lsp-headerline-breadcrumb-enable nil
 
       ;; Global line wrap
-      global-visual-line-mode t
+      ;;global-visual-line-mode t
 
       ;; More common use-case
       ;; The ":s" command changes every occurrence on the line by default,
@@ -90,6 +89,21 @@
 ;;
 ;;; Modules
 
+;;; :tools LSP
+
+;; Java Indentation
+;; https://www.reddit.com/r/emacs/comments/f98vug/lspjava_not_respecting_formatter_settings/
+(setq lsp-java-format-settings-url "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml")
+(setq lsp-java-format-settings-profile "GoogleStyle")
+
+(defun code-style-hooks ()
+  (setq c-basic-offset 2
+        tab-width 2
+        indent-tabs-mode t))
+
+;; https://www.emacswiki.org/emacs/IndentingJava
+(add-hook 'java-mode-hook 'code-style-hooks)
+
 ;;; :lang org
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -106,11 +120,15 @@
 ;; https://github.com/hlissner/doom-emacs/blob/develop/docs/faq.org#why-is-emacsdoom-slow
 (remove-hook 'org-mode-hook #'org-superstar-mode)
 
+;; Optional perf: turn off org eye candy
 (after! org
-  (setq org-fontify-quote-and-verse-blocks nil
-        org-fontify-whole-heading-line nil
-        org-hide-leading-stars nil
-        org-startup-indented nil))
+  (setq org-log-done 'time
+        org-log-repeat 'time
+        ;; org-fontify-quote-and-verse-blocks nil
+        ;; org-fontify-whole-heading-line nil
+        ;; org-hide-leading-stars nil
+        ;; org-startup-indented nil
+        ))
 
 ;;; :tools magit
 (setq magit-repository-directories '(("~/workspace" . 2))
