@@ -89,7 +89,7 @@
        ;;debugger          ; FIXME stepping through code, to help you add bugs
        ;;direnv            ; NOTE look into using
        ;;docker
-       ;;editorconfig      ; NOTE look into using. let someone else argue about tabs vs spaces
+       editorconfig      ; NOTE look into using. let someone else argue about tabs vs spaces
        ;;ein               ; tame Jupyter notebooks with emacs
        (eval +overlay)     ; run code, run (also, repls)
        ;;gist              ; interacting with github gists
@@ -148,7 +148,7 @@
        ;;nix               ; I hereby declare "nix geht mehr!"
        ;;ocaml             ; an objective camel
 
-       ; https://github.com/hlissner/doom-emacs/tree/develop/modules/lang/org#module-flags
+                                        ; https://github.com/hlissner/doom-emacs/tree/develop/modules/lang/org#module-flags
        (org +dragndrop +pomodoro +journal +roam) ; organize your plain life in plain text
 
        ;;php               ; perl's insecure younger brother
