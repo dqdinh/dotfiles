@@ -267,10 +267,27 @@ Enter (open -> in progress -> done)
 
 NOTE: can't use checkboxes with tags
 
+== Magit ==
 
+SPC g g (magit status)
+s (stage change)
+u (unstage change)
+c (commit)
+c c (magit-commit magit-commit-create)
+b (branch)
+b s (branch and branch-spinoff)
+
+M (magit-remote)
+P (magit-push)
+
+# Magit Flows:
+- stage, branch-spinoff, commit, push to remote
+
+# Forge pull
+@
 
 ```
-
+TODO - replay magit setup with forge for create a branched PR and CR/merging a PR as an owner
 
 ## Org mode
 ### Troubleshooting
