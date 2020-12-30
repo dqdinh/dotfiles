@@ -41,7 +41,7 @@ SPC o -
 SHIFT 9
 
 # Create directory
-+ (SHIFT =)
++
 
 # Mark and execute deletion
 d
@@ -58,7 +58,7 @@ SHIFT m
 SHIFT o
 
 # Mark all directories
-* / (SHIFT 8 /)
+* /
 
 # Toggle / invert between (un)marked files and directories
 t
@@ -103,7 +103,7 @@ SPC .
 
 # Query all buffers
 SPC b B
-SPC <
+SPC < (e.g., SPC SHIFT .)
 
 # Create and save new buffer
 SPC b N
@@ -125,6 +125,60 @@ C-w w or C-w hjkl
 
 # resize
 C-w < > + -
+
+== Packages ==
+https://github.com/hlissner/doom-emacs/blob/develop/docs/getting_started.org#package-management
+
+== Help ==
+
+# Describe function
+SPC h f
+
+# Describe variable
+SPC h v
+
+== evil-snipe ==
+Short distance navigation
+
+# Find char, hop to next char, hop backwards
+f (or F)
+<character>
+;
+,
+
+# Find and land one space before char, hop next, hop back
+t
+<character>
+;
+,
+
+# Find 2 chars, hop next and back
+s
+<2 chars>
+;
+,
+
+# Remembers last search
+; 'or' ,
+
+# Visual selection by char snipping
+v
+f 'or' t
+<char or 2 char>
+; 'or' ,
+
+== Avy ==
+Longer distance navigation
+
+# Go to char sequence
+g s SPC
+
+# Go to char-2
+g s s
+
+# Go to char-timer
+g s /
+
 ```
 
 
