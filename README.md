@@ -237,8 +237,38 @@ file:<file_name> 'or' https://www.google.com 'or' shell:ls *.org
 SPC n l
 SPC m l
 
+# Source code and snippets
+<s TAB
+
+# Format code in buffer
+SPC m '
+
+# Babel: Execute source code block
+C-c C-c
+
 # Misc
 - create custom links by defining custom and exiting org functions in config.el
+
+== Org TODO / GTD / Agenda ==
+C-c t t
+Shift-left 'or' Shift-right (cycle status)
+Shift-up / Shift-down (priority cookies)
+
+SPC o a t (open agenda's todo list)
+
+SPC m q (add tag to todo)
+
+SPC o a m (search for a tag)
+
+# Lists and checkboxes
+- <list name>
+Shift-left 'or' Shift-right (change bullet type)
+Enter (open -> in progress -> done)
+
+NOTE: can't use checkboxes with tags
+
+
+
 ```
 
 
