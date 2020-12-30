@@ -113,6 +113,12 @@ alias java11="export JAVA_HOME=$JAVA_11_HOME"
 # alias jshell8='/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/bin/jshell'
 alias jshell11='/Library/Java/JavaVirtualMachines/adoptopenjdk-11.jdk/Contents/Home/bin/jshell'
 
+# ls + metadata
+alias ll='ls -lah' 
+
+# Open emacs app 
+alias ee='open /usr/local/opt/emacs-plus@27/Emacs.app'
+
 # default to Java 8
 # Then to change versions, just use the alias e.g., java11
 # https://stackoverflow.com/a/52524114
