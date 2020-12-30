@@ -198,6 +198,21 @@ g s s <char-2>
 # Go to char-timer
 g s / <chars>
 
+== evil-multiedit ==
+
+# Select target and match consecutive matches
+M-d
+M-d
+# Select previous match after identifying target
+M-D
+<vim-edits>
+
+# Select all, navigate next/prev
+Shift r
+C-n
+C-p
+<vim-edits>
+
 ```
 
 
