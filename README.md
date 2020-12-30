@@ -213,6 +213,32 @@ C-n
 C-p
 <vim-edits>
 
+== Org Mode ==
+
+# Move nodes of similar level
+M-up 'or' M-down
+
+# Promote or demote node level
+M-h 'or' M-l
+
+# Create numbered Lists
+1. <text>
+C-enter
+M-up / M-down (reorder list)
+
+# Create links
++ [[<Node name>]]
+
+# Target other files or a url
+SPC m l
+file:<file_name> 'or' https://www.google.com 'or' shell:ls *.org
+
+# Store and use stored links
+SPC n l
+SPC m l
+
+# Misc
+- create custom links by defining custom and exiting org functions in config.el
 ```
 
 
