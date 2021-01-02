@@ -9,6 +9,9 @@ export PATH="$HOME/.emacs.d/bin:$HOME/.rbenv/bin:$PATH"
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
+# If you're a Vim user, setting the $EDITOR environment variable to vim will enable and further customize the vi-style key bindings (see tmux manual).
+export EDITOR=vim
+
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
