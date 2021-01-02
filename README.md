@@ -8,6 +8,10 @@
 - [zsh](#zsh)
 - [intellij](#intellij)
 
+# Quality of life
+- sway window manger
+- alacritty term
+
 # Emacs
 ## Doom
 
