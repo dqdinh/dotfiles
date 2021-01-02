@@ -386,6 +386,7 @@ stop
 ```
 
 # VIM
+Basic setup
 https://github.com/amix/vimrc
 
 # GPG
