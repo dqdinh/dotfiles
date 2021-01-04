@@ -1,0 +1,5 @@
+ignore-empty-password
+show-failed-attempts
+daemonize
+indicator-caps-lock
+image=/usr/share/backgrounds/fedora-workstation/aurora-over-iceland.png
