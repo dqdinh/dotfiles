@@ -48,7 +48,7 @@
        ;;unicode           ; extended unicode support for various languages
        vc-gutter         ; vcs diff in the fringe
        ;;vi-tilde-fringe   ; fringe tildes to mark beyond EOB
-       ;;window-select     ; visually switch windows
+       window-select     ; visually switch windows
        workspaces        ; tab emulation, persistence & separate workspaces
        ;;zen               ; distraction-free coding or writing
 
@@ -56,7 +56,7 @@
        (evil +everywhere); come to the dark side, we have cookies
        file-templates    ; auto-snippets for empty files
        fold              ; (nigh) universal code folding
-       (format +onsave)  ; automated prettiness
+       format  ; automated prettiness
        ;;god               ; run Emacs commands without modifier keys
        ;;lispy             ; vim for lisp, for people who don't like vim
        multiple-cursors  ; editing in many places at once
@@ -81,12 +81,12 @@
 
        :checkers
        syntax              ; tasing you for every semicolon you forget
-       (spell +aspell)     ; tasing you for misspelling mispelling
+       ;;(spell +flycheck)     ; tasing you for misspelling mispelling
        ;;grammar           ; tasing grammar mistake every you make
 
        :tools
        ;;ansible
-       ;;debugger          ; FIXME stepping through code, to help you add bugs
+       (debugger +lsp)         ; FIXME stepping through code, to help you add bugs
        ;;direnv            ; NOTE look into using
        ;;docker
        editorconfig      ; NOTE look into using. let someone else argue about tabs vs spaces
@@ -143,13 +143,13 @@
        ;;factor
        ;;ledger            ; an accounting system in Emacs
        ;;lua               ; one-based indices? one-based indices
-       ;;markdown          ; writing docs for people to ignore
+       markdown          ; writing docs for people to ignore
        ;;nim               ; python + lisp at the speed of c
        ;;nix               ; I hereby declare "nix geht mehr!"
        ;;ocaml             ; an objective camel
 
-                                        ; https://github.com/hlissner/doom-emacs/tree/develop/modules/lang/org#module-flags
-       (org +dragndrop +pomodoro +journal +roam) ; organize your plain life in plain text
+       ; https://github.com/hlissner/doom-emacs/tree/develop/modules/lang/org#module-flags
+       org ; organize your plain life in plain text
 
        ;;php               ; perl's insecure younger brother
        ;;plantuml          ; diagrams for confusing people more
