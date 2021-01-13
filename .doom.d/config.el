@@ -63,8 +63,8 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-(setq doom-font (font-spec :family "SF Mono" :size 18 :weight 'light)
-      doom-variable-pitch-font (font-spec :family "SF Pro" :size 19))
+(setq doom-font (font-spec :family "Source Code Pro" :size 18 :weight 'regular)
+      doom-variable-pitch-font (font-spec :family "Source Code Pro" :size 18))
 
 ;; Prevents some cases of Emacs flickering
 (add-to-list 'default-frame-alist '(inhibit-double-buffering . t))
@@ -91,6 +91,15 @@
 
 ;;; :tools LSP
 
+;;
+;;; LSP Java
+(after! lsp
+  (setq lsp-java-java-path "~/.sdkman/candidates/java/current/bin/java"
+        lsp-java-import-gradle-java-home "~/.sdkman/candidates/java/current/bin/java"
+        lsp-java-configurations-runtimes '[(:name "JavaSE-11"
+                                                  :path "~/.sdkman/candidates/java/current"
+                                                  :default t)]))
+
 ;; Java Indentation
 ;; https://www.reddit.com/r/emacs/comments/f98vug/lspjava_not_respecting_formatter_settings/
 (setq lsp-java-format-settings-url "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml")
@@ -109,10 +118,6 @@
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/workspace/org/"
       org-archive-location (concat org-directory ".archive/%s::")
-      org-roam-directory (concat org-directory "notes/")
-      org-roam-db-location (concat org-roam-directory ".org-roam.db")
-      org-journal-encrypt-journal t
-      org-journal-file-format "%Y%m%d.org"
       org-startup-folded 'overview
       org-ellipsis " [...] ")
 
