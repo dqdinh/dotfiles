@@ -149,7 +149,7 @@
        ;;ocaml             ; an objective camel
 
        ; https://github.com/hlissner/doom-emacs/tree/develop/modules/lang/org#module-flags
-       org ; organize your plain life in plain text
+       (org +pretty +pomodoro) ; organize your plain life in plain text
 
        ;;php               ; perl's insecure younger brother
        ;;plantuml          ; diagrams for confusing people more
