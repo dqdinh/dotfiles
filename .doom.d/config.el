@@ -123,7 +123,7 @@
 
 ;; Org performance improvements
 ;; https://github.com/hlissner/doom-emacs/blob/develop/docs/faq.org#why-is-emacsdoom-slow
-(remove-hook 'org-mode-hook #'org-superstar-mode)
+;; (remove-hook 'org-mode-hook #'org-superstar-mode)
 
 ;; Optional perf: turn off org eye candy
 (after! org
