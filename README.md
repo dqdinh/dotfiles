@@ -9,7 +9,7 @@
 - [intellij](#intellij)
 
 # Quality of life
-- sway window manger
+- sdkman
 - alacritty term
 
 # Emacs
